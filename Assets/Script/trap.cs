@@ -1,81 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-public class trap : MonoBehaviour
+public class trap : AbstractEnemy
 {
-    // Start is called before the first frame update
-    public Transform player;
-    public GameObject EnemyBulletPrefab;
-    public GameObject BigEnemyBulletPrefab;
-    public float bulletSpeed;
+    public GameObject bigEnemyBulletPrefab;
     public float bigBulletSpeed;
-    public float bulletCooldown;
-    public float bulletCooldownBase;
     public float bigBulletCooldown;
     public float bigBulletCooldownBase;
-    public float trapHealth;
 
-    private void Awake()
+    private protected override void Awake()
     {
         bulletCooldownBase = bulletCooldown;
         bulletCooldown = 0;
         bigBulletCooldownBase = bigBulletCooldown;
         bigBulletCooldown = 0;
     }
-
-    // Update is called once per frame
-
-    private void FixedUpdate()
+    
+    private protected override void FixedUpdate()
     {
-        if (trapHealth > 0)
+        if (health > 0)
         {
-            if (trapHealth >= 20)
+            if (health >= 20)
             {
                 Shoot();
             }
-            else if (trapHealth <= 19)
+            else if (health <= 19)
             {
                 TargetedShoot();
             }
-        }
-        void Shoot()
-        {
-            if (0 < bulletCooldown)
-            {
-                return;
-            }
-            bulletCooldown = bulletCooldownBase;
-
-            Vector3 direction = Vector3.right;
-
-            float angle = Mathf.Atan2(direction.y, direction.x);
-            float angleDegrees = angle * Mathf.Rad2Deg;
-
-            GameObject bullet = Instantiate(EnemyBulletPrefab, transform.position, Quaternion.Euler(0, 0, angleDegrees));
-
-            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-            rb.velocity = direction * bulletSpeed * Time.fixedDeltaTime;
-        }
-
-        void TargetedShoot()
-        {
-            if (0 < bigBulletCooldown)
-            {
-                return;
-            }
-            bigBulletCooldown = bigBulletCooldownBase;
-
-            // Set the direction vector to point to the right
-            Vector3 direction = (player.position - transform.position).normalized;
-
-            float angle = Mathf.Atan2(direction.y, direction.x);
-            float angleDegrees = angle * Mathf.Rad2Deg;
-
-            GameObject bullet = Instantiate(BigEnemyBulletPrefab, transform.position, Quaternion.Euler(0, 0, angleDegrees));
-
-            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-            rb.velocity = direction * bigBulletSpeed * Time.fixedDeltaTime;
         }
         if (bulletCooldown > 0)
         {
@@ -85,16 +35,46 @@ public class trap : MonoBehaviour
         {
             bigBulletCooldown -= Time.fixedDeltaTime;
         }
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
+    } 
+    private protected override void Shoot()
     {
-        if (collision.CompareTag("BulletTag"))
+        if (0 < bulletCooldown)
         {
-            trapHealth -= 15;
+            return;
         }
-        if (collision.CompareTag("BigBulletTag"))
+        bulletCooldown = bulletCooldownBase;
+
+        Vector3 direction = Vector3.right;
+
+        float angle = Mathf.Atan2(direction.y, direction.x);
+        float angleDegrees = angle * Mathf.Rad2Deg;
+
+        GameObject bullet = Instantiate(enemyBulletPrefab, transform.position, Quaternion.Euler(0, 0, angleDegrees));
+
+        rb = bullet.GetComponent<Rigidbody2D>();
+        rb.velocity = direction * bulletSpeed * Time.fixedDeltaTime;
+    }
+    
+    void TargetedShoot()
+    {
+        if (0 < bigBulletCooldown)
         {
-            trapHealth -= 30;
+            return;
         }
+        bigBulletCooldown = bigBulletCooldownBase;
+        
+        Vector3 direction = (player.position - transform.position).normalized;
+
+        float angle = Mathf.Atan2(direction.y, direction.x);
+        float angleDegrees = angle * Mathf.Rad2Deg;
+
+        GameObject bullet = Instantiate(bigEnemyBulletPrefab, transform.position, Quaternion.Euler(0, 0, angleDegrees));
+
+        rb = bullet.GetComponent<Rigidbody2D>();
+        rb.velocity = direction * bigBulletSpeed * Time.fixedDeltaTime;
+    }
+    new public void OnTriggerEnter2D(Collider2D collision)
+    {
+        base.OnTriggerEnter2D(collision);
     }
 }
