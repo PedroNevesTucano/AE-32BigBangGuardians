@@ -1404,6 +1404,8 @@ MonoBehaviour:
   playerHealth: 100
   iFrames: 0.3
   iFramesBase: 0
+  iFramesBlinking: 0
+  iFramesBlinkingBase: 0.1
   canDash: 0
   isPaused: 0
   tr: {fileID: 1253428834}
@@ -1776,7 +1778,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c814b25ab913cd4cab4d7715e4ed205, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Switch: 0
   myTextMesh: {fileID: 1211729570}
 --- !u!1001 &1675782982
 PrefabInstance:

@@ -7,16 +7,16 @@ using UnityEngine.SceneManagement;
 public class Lv1 : MonoBehaviour
 {
     // Start is called before the first frame update
-    public bool Switch;
+    private bool Switch;
     public TextMeshProUGUI myTextMesh;
-    private string fullText = "Click (E) to go to Level 1!";
+    private string fullText = "(E) Enter Level 1";
     private float textSpeed = 0.02f;
 
 
     // Update is called once per frame
     void Update()
     {
-        if (Switch == true && Input.GetKey(KeyCode.E))
+        if (Input.GetKey(KeyCode.E) && Switch == true)
         {
             SceneManager.LoadScene("Level1");
         }
