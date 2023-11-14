@@ -1,3 +1,4 @@
+using UnityEditor.Build;
 using UnityEngine;
 
 public class ShootProjectile : MonoBehaviour
@@ -21,7 +22,8 @@ public class ShootProjectile : MonoBehaviour
     public bool bigShootFixed;
 
 
-    private Player playerScript;
+    public Player playerScript;
+    private SpriteRenderer playersprite;
 
     private void Awake()
     {
@@ -34,7 +36,7 @@ public class ShootProjectile : MonoBehaviour
     }
     private void Start()
     {
-        playerScript = GetComponent<Player>();
+        playersprite = playerScript.GetComponent<SpriteRenderer>();
     }
 
     private void FixedUpdate()
@@ -85,23 +87,29 @@ public class ShootProjectile : MonoBehaviour
             if (requiredHoldTime > 0)
             {
                 GetComponent<SpriteRenderer>().color = new Color(0.5f, 0f, 0f, 1f);
+                playersprite.color = new Color(0.5f, 0f, 0f, 1f);
+
             }
             else
             {
                 GetComponent<SpriteRenderer>().color = Color.red;
+                playersprite.color = Color.red;
             }
         }
         else if (isHolding == true && bigBulletCooldown > 0 && holdBefore <= 0)
         {
             GetComponent<SpriteRenderer>().color = new Color(0.3f, 0.3f, 0.3f, 1f);
+            playersprite.color = new Color(0.3f, 0.3f, 0.3f, 1f);
         }
         else if (isHolding == true && bulletCooldown > 0)
         {
             GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 0.5f, 1f);
+            playersprite.color = new Color(0.5f, 0.5f, 0.5f, 1f);
         }
         else
         {
-            GetComponent<SpriteRenderer>().color = Color.black;
+            GetComponent<SpriteRenderer>().color = Color.white;
+            playersprite.color = Color.black;
         }
 
         

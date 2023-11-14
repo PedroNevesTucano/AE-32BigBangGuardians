@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     public bool canDash;
     public bool isPaused;
 
+    private ShootProjectile sniperScript;
+
     private Vector3 direction;
 
     private Rigidbody2D rb;
@@ -38,6 +40,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        sniperScript = GetComponent<ShootProjectile>();
         isPaused = false;
         canDash = true;
         rb = GetComponent<Rigidbody2D>();
@@ -128,11 +131,15 @@ public class Player : MonoBehaviour
         {
             dashCooldown -= Time.fixedDeltaTime;
         }
-        if (!IsDashing())
+        if (!IsDashing() && sniperScript.isRightMouseButtonDown == false)
         {
             Vector3 movement = new Vector3(xAxyx, yAxyx, 0).normalized;
             rb.velocity = movement * speed * Time.fixedDeltaTime;
-        }
+        } else if (!IsDashing() && sniperScript.isRightMouseButtonDown == true)
+            {
+            Vector3 movement = new Vector3(xAxyx, yAxyx, 0).normalized;
+            rb.velocity = movement * speed / 1.3f * Time.fixedDeltaTime;
+            }
         else
         {
             rb.velocity = dashDirection * dashSpeed * Time.fixedDeltaTime;
