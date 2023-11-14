@@ -1100,7 +1100,7 @@ PrefabInstance:
     - target: {fileID: 8757441710427990478, guid: 1c8f4c2bdb09b2046b74ecf72847d726, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1304379091}
+      objectReference: {fileID: 1304379088}
     - target: {fileID: 8757441710427990478, guid: 1c8f4c2bdb09b2046b74ecf72847d726, type: 3}
       propertyPath: BigEnemyBulletPrefab
       value: 
@@ -1292,7 +1292,7 @@ PrefabInstance:
     - target: {fileID: 8757441710427990478, guid: 1c8f4c2bdb09b2046b74ecf72847d726, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1304379091}
+      objectReference: {fileID: 1304379088}
     - target: {fileID: 8757441710427990478, guid: 1c8f4c2bdb09b2046b74ecf72847d726, type: 3}
       propertyPath: trapHealth
       value: 40
@@ -1752,7 +1752,7 @@ PrefabInstance:
     - target: {fileID: 8505290558371305197, guid: 0d2f4215b6ccc2a48b67ae849caa129c, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1304379091}
+      objectReference: {fileID: 1304379088}
     - target: {fileID: 8505290558371305197, guid: 0d2f4215b6ccc2a48b67ae849caa129c, type: 3}
       propertyPath: viewRange
       value: 7
@@ -1904,7 +1904,7 @@ PrefabInstance:
     - target: {fileID: 8757441710427990478, guid: 1c8f4c2bdb09b2046b74ecf72847d726, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1304379091}
+      objectReference: {fileID: 1304379088}
     - target: {fileID: 8757441710427990478, guid: 1c8f4c2bdb09b2046b74ecf72847d726, type: 3}
       propertyPath: trapHealth
       value: 40
@@ -2775,7 +2775,7 @@ PrefabInstance:
     - target: {fileID: 8757441710427990478, guid: 1c8f4c2bdb09b2046b74ecf72847d726, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1304379091}
+      objectReference: {fileID: 1304379088}
     - target: {fileID: 8757441710427990478, guid: 1c8f4c2bdb09b2046b74ecf72847d726, type: 3}
       propertyPath: BigEnemyBulletPrefab
       value: 
@@ -2910,7 +2910,7 @@ PrefabInstance:
     - target: {fileID: 8757441710427990478, guid: 1c8f4c2bdb09b2046b74ecf72847d726, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1304379091}
+      objectReference: {fileID: 1304379088}
     - target: {fileID: 8757441710427990478, guid: 1c8f4c2bdb09b2046b74ecf72847d726, type: 3}
       propertyPath: BigEnemyBulletPrefab
       value: 
@@ -3592,7 +3592,7 @@ PrefabInstance:
     - target: {fileID: 8505290558371305197, guid: 0d2f4215b6ccc2a48b67ae849caa129c, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1304379091}
+      objectReference: {fileID: 1304379088}
     - target: {fileID: 8505290558371305197, guid: 0d2f4215b6ccc2a48b67ae849caa129c, type: 3}
       propertyPath: viewRange
       value: 7
@@ -3895,7 +3895,7 @@ PrefabInstance:
     - target: {fileID: 8757441710427990478, guid: 1c8f4c2bdb09b2046b74ecf72847d726, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1304379091}
+      objectReference: {fileID: 1304379088}
     - target: {fileID: 8757441710427990478, guid: 1c8f4c2bdb09b2046b74ecf72847d726, type: 3}
       propertyPath: trapHealth
       value: 40
@@ -4104,7 +4104,7 @@ PrefabInstance:
     - target: {fileID: 8757441710427990478, guid: 1c8f4c2bdb09b2046b74ecf72847d726, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1304379091}
+      objectReference: {fileID: 1304379088}
     - target: {fileID: 8757441710427990478, guid: 1c8f4c2bdb09b2046b74ecf72847d726, type: 3}
       propertyPath: trapHealth
       value: 40

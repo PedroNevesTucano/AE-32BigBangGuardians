@@ -11,7 +11,7 @@ public class SimpleEnemy : AbstractEnemy
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Update()
@@ -24,7 +24,7 @@ public class SimpleEnemy : AbstractEnemy
 
     private protected override void FixedUpdate()
     {
-        Vector3 directionToPlayer = player.position - transform.position;
+        Vector3 directionToPlayer = player.transform.position - transform.position;
         float distanceToPlayer = directionToPlayer.magnitude;
         Vector3 movementDirection = directionToPlayer.normalized;
         
@@ -51,12 +51,12 @@ public class SimpleEnemy : AbstractEnemy
             if (distanceToPlayer >= 3)
             {
                 Shoot();
-                rb.velocity = movementDirection * movementSpeed * Time.fixedDeltaTime;
+                rb.velocity = movementSpeed * Time.fixedDeltaTime * movementDirection;
             }
             else if (distanceToPlayer < 2f)
             {
                 Shoot();
-                rb.velocity = -movementDirection * movementSpeed * Time.fixedDeltaTime;
+                rb.velocity = movementSpeed * Time.fixedDeltaTime * -movementDirection;
             }
             else
             {
@@ -78,15 +78,17 @@ public class SimpleEnemy : AbstractEnemy
         }
         bulletCooldown = bulletCooldownBase;
 
-        Vector3 direction = (player.position - transform.position).normalized;
+        Vector3 direction = (player.transform.position - transform.position).normalized;
 
         float angle = Mathf.Atan2(direction.y, direction.x);
         float angleDegrees = angle * Mathf.Rad2Deg;
-
+        
         GameObject bullet = Instantiate(enemyBulletPrefab, transform.position, Quaternion.Euler(0, 0, angleDegrees));
 
-        rb = bullet.GetComponent<Rigidbody2D>();
-        rb.velocity = direction * bulletSpeed * Time.fixedDeltaTime;
+        Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
+        
+        bulletRb = bullet.GetComponent<Rigidbody2D>();
+        bulletRb.velocity = bulletSpeed * Time.fixedDeltaTime * direction;
     }
 
     new public void OnTriggerEnter2D(Collider2D collision)

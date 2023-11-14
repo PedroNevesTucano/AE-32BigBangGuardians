@@ -63,7 +63,7 @@ public class trap : AbstractEnemy
         }
         bigBulletCooldown = bigBulletCooldownBase;
         
-        Vector3 direction = (player.position - transform.position).normalized;
+        Vector3 direction = (player.transform.position - transform.position).normalized;
 
         float angle = Mathf.Atan2(direction.y, direction.x);
         float angleDegrees = angle * Mathf.Rad2Deg;

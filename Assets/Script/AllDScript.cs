@@ -17,7 +17,8 @@ public class AllDScript : AbstractEnemy
         {
             bulletCooldown -= Time.fixedDeltaTime;
         }
-        Vector3 directionToPlayer = player.position - transform.position;
+        
+        Vector3 directionToPlayer = player.transform.position - transform.position;
         float distanceToPlayer = directionToPlayer.magnitude;
 
         if (health > 0)

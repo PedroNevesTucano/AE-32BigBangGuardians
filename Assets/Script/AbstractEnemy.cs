@@ -1,7 +1,7 @@
 using UnityEngine;
 public abstract class AbstractEnemy : MonoBehaviour
 {
-    public Transform player;
+    public GameObject player;
     public GameObject enemyBulletPrefab;
     public float bulletSpeed;
     public float bulletCooldown;
