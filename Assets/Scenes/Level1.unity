@@ -1298,6 +1298,10 @@ PrefabInstance:
       value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 8757441710427990478, guid: 1c8f4c2bdb09b2046b74ecf72847d726, type: 3}
+      propertyPath: bulletCooldown
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8757441710427990478, guid: 1c8f4c2bdb09b2046b74ecf72847d726, type: 3}
       propertyPath: bigBulletCooldown
       value: 0.6
       objectReference: {fileID: 0}
@@ -2218,13 +2222,14 @@ MonoBehaviour:
   xAxyx: 0
   yAxyx: 0
   dashSpeed: 1000
-  dashDuration: 0.3
   dashDurationTimer: 0
   dashCooldown: 1
   dashCooldownBase: 0
   playerHealth: 100
   iFrames: 0.3
   iFramesBase: 0
+  iFramesBlinking: 0
+  iFramesBlinkingBase: 0
   canDash: 0
   isPaused: 0
   tr: {fileID: 1304379095}

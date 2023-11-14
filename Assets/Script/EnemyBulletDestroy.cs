@@ -13,7 +13,11 @@ public class EnemyBulletDestroy : MonoBehaviour
         else if (collision.CompareTag("Player"))
         {
             Player player = collision.GetComponent<Player>();
-            if (!player.IsDashing())
+            if (player.IsDashing() || player.iFrames > 0)
+            {
+                return;
+            }
+            else
             {
                 Destroy(gameObject);
             }

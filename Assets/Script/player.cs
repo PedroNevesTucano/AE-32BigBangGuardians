@@ -8,16 +8,22 @@ public class Player : MonoBehaviour
     public float speed;
     public float xAxyx, yAxyx;
     public float dashSpeed;
-    public float dashDuration;
+    private float dashDuration = 0.3f;
     public float dashDurationTimer;
     public float dashCooldown;
     public float dashCooldownBase;
     public float playerHealth;
     private bool invincibility;
-    public float iFrames;
-    public float iFramesBase;
+    public float iFrames = 0.3f;
+    private float iFramesBase;
+    private float iFramesBlinking = 0.1f;
+    private float iFramesBlinkingBase;
     public bool canDash;
     public bool isPaused;
+
+    private SpriteRenderer spriteRenderer;
+
+    private ShootProjectile sniperScript;
 
     private Vector3 direction;
 
@@ -30,14 +36,18 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         dashCooldownBase = dashCooldown;
         dashCooldown = 0;
         iFramesBase = iFrames;
         iFrames = 0;
+        iFramesBlinkingBase = iFramesBlinking;
+        iFramesBlinking = 0;
     }
 
     void Start()
     {
+        sniperScript = GetComponent<ShootProjectile>();
         isPaused = false;
         canDash = true;
         rb = GetComponent<Rigidbody2D>();
@@ -128,11 +138,15 @@ public class Player : MonoBehaviour
         {
             dashCooldown -= Time.fixedDeltaTime;
         }
-        if (!IsDashing())
+        if (!IsDashing() && sniperScript.isRightMouseButtonDown == false)
         {
             Vector3 movement = new Vector3(xAxyx, yAxyx, 0).normalized;
             rb.velocity = movement * speed * Time.fixedDeltaTime;
-        }
+        } else if (!IsDashing() && sniperScript.isRightMouseButtonDown == true)
+            {
+            Vector3 movement = new Vector3(xAxyx, yAxyx, 0).normalized;
+            rb.velocity = movement * speed / 1.3f * Time.fixedDeltaTime;
+            }
         else
         {
             rb.velocity = dashDirection * dashSpeed * Time.fixedDeltaTime;
@@ -141,6 +155,21 @@ public class Player : MonoBehaviour
         if (iFrames > 0)
         {
             iFrames -= Time.fixedDeltaTime;
+            iFramesBlinking -= Time.fixedDeltaTime;
+        }
+        else
+        {
+            spriteRenderer.enabled = true;
+        }
+
+        if ((iFrames > 0 && iFramesBlinking <= 0))
+        {
+            spriteRenderer.enabled = true;
+            iFramesBlinking = iFramesBlinkingBase;
+        }
+        else if (iFrames > 0 && iFramesBlinking > 0)
+        {
+            spriteRenderer.enabled = false;
         }
     }
 
