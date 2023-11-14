@@ -82,6 +82,12 @@ public class ShootProjectile : MonoBehaviour
             isHolding = true;
         }
 
+        if (playerScript.IsDashing() || isRightMouseButtonDown == false)
+        {
+            isHolding = false;
+            requiredHoldTime = requiredHoldTimeBase;
+        }
+
         if (isHolding == true && bigBulletCooldown <= 0 && holdBefore <= 0)
         {
             if (requiredHoldTime > 0)
