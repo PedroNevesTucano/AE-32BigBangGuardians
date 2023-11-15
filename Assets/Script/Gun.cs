@@ -12,6 +12,9 @@ public class Gun : MonoBehaviour
     public Transform firePoint;
     public float spreadAngle = 45f; // Angle of spread for the shotgun pellets.
     public float speed = 5f;
+    public float cooldown = 5f;
+    public float counter = 0;
+    private bool shoot = false;
 
     void Start()
     {
@@ -21,7 +24,7 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && counter <= 0)
         {
             // Instantiate bullets with the desired rotation
             GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, firePoint.rotation.eulerAngles.z + 90));
@@ -41,6 +44,18 @@ public class Gun : MonoBehaviour
             rb.velocity = initialDirection * speed;
             rb1.velocity = initialDirection2 * speed;
             rb2.velocity = initialDirection3 * speed;
+            shoot = true;
+        }
+
+        if (shoot)
+        {
+            counter += Time.deltaTime;
+        }
+
+        if (counter >= cooldown)
+        {
+            counter = 0;
+            shoot = false;
         }
     }
 }
