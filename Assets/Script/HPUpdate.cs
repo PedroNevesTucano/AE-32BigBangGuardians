@@ -1,21 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class HPUpdate : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public TextMeshProUGUI myTextMesh;
     public Player player;
+    public Image healthBarImage;
+
     void Start()
     {
-        myTextMesh = GetComponent<TextMeshProUGUI>();
         player = FindObjectOfType<Player>();
+        healthBarImage = GetComponent<Image>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (player.playerHealth <= 0)
@@ -23,6 +19,23 @@ public class HPUpdate : MonoBehaviour
             player.playerHealth = 0;
         }
 
-        myTextMesh.text = "Health: " + player.playerHealth.ToString();
+        float fillAmount = CalculateFillAmount(player.playerHealth);
+        healthBarImage.fillAmount = fillAmount;
+
+        if (player.playerHealth >= 67)
+        {
+            healthBarImage.color = Color.green;
+        } else if (player.playerHealth >= 34 && player.playerHealth < 67)
+        {
+            healthBarImage.color = Color.yellow;
+        }else if (player.playerHealth <34)
+        {
+            healthBarImage.color = Color.red;
+        }
+    }
+
+    float CalculateFillAmount(float currentHealth)
+    {
+        return currentHealth / 100;
     }
 }

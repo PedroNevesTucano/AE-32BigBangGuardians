@@ -1,24 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CanDashUpdate : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public TextMeshProUGUI myTextMesh;
     public Player player;
+    public Image staminaBarImage;
+
     void Start()
     {
-        myTextMesh = GetComponent<TextMeshProUGUI>();
         player = FindObjectOfType<Player>();
+        staminaBarImage = GetComponent<Image>();
     }
 
-    // Update is called once per frame
     void Update()
     {
+        if (player.canDash == true)
+        {
+            staminaBarImage.color = new Color(1f, 0.5647f, 0f, 1f); ;
+        }
+        else
+        {
+            staminaBarImage.color = new Color(0.3725f, 0.3725f, 0.3725f, 1f);
+        }
+    }
 
-        myTextMesh.text = "Can Dash: " + player.canDash.ToString();
+    float CalculateFillAmount(float currentHealth)
+    {
+        return currentHealth / 100;
     }
 }
