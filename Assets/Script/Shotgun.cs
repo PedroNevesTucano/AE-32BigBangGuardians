@@ -38,9 +38,9 @@ public class Shotgun : AbstractWeapon
             Vector2 initialDirection2 = (Vector2)(Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z + 10) * Vector3.up);
             Vector2 initialDirection3 = (Vector2)(Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z - 10) * Vector3.up);
 
-            rb.velocity = initialDirection * bulletSpeed;
-            rb1.velocity = initialDirection2 * bulletSpeed;
-            rb2.velocity = initialDirection3 * bulletSpeed;
+            rb.velocity = initialDirection * bulletSpeed * Time.fixedDeltaTime;
+            rb1.velocity = initialDirection2 * bulletSpeed * Time.fixedDeltaTime;
+            rb2.velocity = initialDirection3 * bulletSpeed * Time.fixedDeltaTime;
             isshooting = true;
         }
     }

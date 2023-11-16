@@ -157,7 +157,7 @@ public class Sniper : AbstractWeapon
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
 
         Vector2 initialDirection = (Vector2)(Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z) * Vector3.up);
-        rb.velocity = initialDirection * bulletSpeed;
+        rb.velocity = initialDirection * bulletSpeed * Time.fixedDeltaTime;
     }
 
     void BigShoot()
