@@ -147,6 +147,11 @@ public class Sniper : AbstractWeapon
 
     private protected override void Shoot()
     {
+        if (0 < bulletCooldown)
+        {
+            return;
+        }
+        bulletCooldown = bulletCooldownBase;
         GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, firePoint.rotation.eulerAngles.z + 90));
 
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();

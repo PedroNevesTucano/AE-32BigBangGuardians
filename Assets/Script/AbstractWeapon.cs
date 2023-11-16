@@ -9,8 +9,8 @@ public abstract class AbstractWeapon : MonoBehaviour
     public Transform firePoint;
     public float bulletSpeed;
     protected bool isshooting = false;
-    public float cooldown = 5f;
-    public float counter = 0;
+    public float cooldown;
+    public float counter;
 
     private protected abstract void Shoot();
 }
