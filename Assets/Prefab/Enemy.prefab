@@ -179,5 +179,3 @@ MonoBehaviour:
   viewRange: 250
   health: 30
   rb: {fileID: 0}
-  movementSpeed: 250
-  chasing: 0

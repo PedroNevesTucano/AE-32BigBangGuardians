@@ -1,17 +1,17 @@
 using UnityEngine;
 public class AllDScript : AbstractEnemy
 {
-    public bool switchDirection;
-    private protected override void  Awake()
+    private bool switchDirection;
+    private void Awake()
     {
         bulletCooldownBase = bulletCooldown;
         bulletCooldown = 0;
     }
-    void Start()
+    private void Start()
     {
         switchDirection = false;
     }
-    private protected override void FixedUpdate()
+    private void FixedUpdate()
     {
         if (bulletCooldown > 0)
         {
@@ -39,48 +39,45 @@ public class AllDScript : AbstractEnemy
     }
     private protected override void Shoot()
     {
-        if (0 < bulletCooldown)
+        if (CooldownChecker())
         {
-            return;
-        }
-        bulletCooldown = bulletCooldownBase;
+            if (switchDirection == false)
+            {
+                Vector3 rightDirection = Vector3.right;
+                ShootDirection(rightDirection);
 
-        if (switchDirection == false)
-        {
-            Vector3 rightDirection = Vector3.right;
-            ShootDirection(rightDirection);
+                Vector3 leftDirection = Vector3.left;
+                ShootDirection(leftDirection);
 
-            Vector3 leftDirection = Vector3.left;
-            ShootDirection(leftDirection);
+                Vector3 downDirection = Vector3.down;
+                ShootDirection(downDirection);
 
-            Vector3 downDirection = Vector3.down;
-            ShootDirection(downDirection);
+                Vector3 upDirection = Vector3.up;
+                ShootDirection(upDirection);
 
-            Vector3 upDirection = Vector3.up;
-            ShootDirection(upDirection);
+                switchDirection = true;
+            }
+            else
+            {
+                Vector3 rightUpDirection = new Vector3(1f, 1f, 0f).normalized;
+                ShootDirection(rightUpDirection);
 
-            switchDirection = true;
-        }
-        else
-        {
-            Vector3 rightUpDirection = new Vector3(1f, 1f, 0f).normalized;
-            ShootDirection(rightUpDirection);
+                Vector3 rightDownDirection = new Vector3(1f, -1f, 0f).normalized;
+                ShootDirection(rightDownDirection);
 
-            Vector3 rightDownDirection = new Vector3(1f, -1f, 0f).normalized;
-            ShootDirection(rightDownDirection);
+                Vector3 leftUpDirection = new Vector3(-1f, 1f, 0f).normalized;
+                ShootDirection(leftUpDirection);
 
-            Vector3 leftUpDirection = new Vector3(-1f, 1f, 0f).normalized;
-            ShootDirection(leftUpDirection);
+                Vector3 leftDownDirection = new Vector3(-1f, -1f, 0f).normalized;
+                ShootDirection(leftDownDirection);
 
-            Vector3 leftDownDirection = new Vector3(-1f, -1f, 0f).normalized;
-            ShootDirection(leftDownDirection);
-
-            switchDirection = false;
+                switchDirection = false;
+            }
         }
     }
     
     
-    void ShootDirection(Vector3 direction)
+    private void ShootDirection(Vector3 direction)
     {
         float angle = Mathf.Atan2(direction.y, direction.x);
         float angleDegrees = angle * Mathf.Rad2Deg;
@@ -90,9 +87,5 @@ public class AllDScript : AbstractEnemy
         rb = bullet.GetComponent<Rigidbody2D>();
         rb.velocity = direction.normalized * bulletSpeed * Time.fixedDeltaTime;
     }
-
-    new public void OnTriggerEnter2D(Collider2D collision)
-    {
-        base.OnTriggerEnter2D(collision);
-    }
+    private new void OnTriggerEnter2D(Collider2D collision) => base.OnTriggerEnter2D(collision);
 }
