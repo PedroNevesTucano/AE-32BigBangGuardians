@@ -1,11 +1,10 @@
 using UnityEditor.Build;
 using UnityEngine;
 
-public class ShootProjectile : MonoBehaviour
+public class Sniper : AbstractWeapon
 {
-    public GameObject bulletPrefab;
+ 
     public GameObject bigBulletPrefab;
-    public float bulletSpeed = 10f;
     public float bigBulletSpeed = 20f;
     public float bulletCooldown;
     public float bulletCooldownBase;
@@ -118,7 +117,7 @@ public class ShootProjectile : MonoBehaviour
             playersprite.color = Color.black;
         }
 
-        
+
 
         if (Input.GetMouseButtonUp(0) && isHolding && !playerScript.IsDashing())
         {
@@ -146,28 +145,19 @@ public class ShootProjectile : MonoBehaviour
         }
     }
 
-        void Shoot()
+    private protected override void Shoot()
     {
         if (0 < bulletCooldown)
         {
             return;
         }
         bulletCooldown = bulletCooldownBase;
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0;
-
-        Vector3 direction = (mousePosition - transform.position).normalized;
-
-        float angle = Mathf.Atan2(direction.y, direction.x);
-
-        float angleDegrees = angle * Mathf.Rad2Deg;
-
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, angleDegrees));
+        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, firePoint.rotation.eulerAngles.z + 90));
 
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        
-        rb.velocity = direction * bulletSpeed * Time.fixedDeltaTime;
 
+        Vector2 initialDirection = (Vector2)(Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z) * Vector3.up);
+        rb.velocity = initialDirection * bulletSpeed;
     }
 
     void BigShoot()

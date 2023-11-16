@@ -6,7 +6,8 @@ public class CameraController : MonoBehaviour
 {
     public Transform player; 
     public float followSpeed = 10f; 
-    public float mouseOffset = 3f; 
+    public float mouseOffset = 3f;
+    public GameObject sniper;
 
     private Vector3 initialOffset;
     private bool isRightMouseButtonDown = false;
@@ -18,7 +19,7 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && sniper.activeSelf)
         {
             isRightMouseButtonDown = true;
         }
