@@ -23,9 +23,4 @@ public class CanDashUpdate : MonoBehaviour
             staminaBarImage.color = new Color(0.3725f, 0.3725f, 0.3725f, 1f);
         }
     }
-
-    float CalculateFillAmount(float currentHealth)
-    {
-        return currentHealth / 100;
-    }
 }

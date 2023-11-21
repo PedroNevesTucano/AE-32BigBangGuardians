@@ -8,6 +8,7 @@ public class Lv1 : MonoBehaviour
 {
     // Start is called before the first frame update
     private bool Switch;
+    public bool switchToTransitionLv1;
     public TextMeshProUGUI myTextMesh;
     private string fullText = "(E) Enter Level 1";
     private float textSpeed = 0.02f;
@@ -18,7 +19,7 @@ public class Lv1 : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.E) && Switch == true)
         {
-            SceneManager.LoadScene("Level1");
+            switchToTransitionLv1 = true;
         }
     }
 
