@@ -91,14 +91,14 @@ public class Sniper : AbstractWeapon
         {
             if (requiredHoldTime > 0)
             {
-                GetComponent<SpriteRenderer>().color = new Color(0.5f, 0f, 0f, 1f);
-                playersprite.color = new Color(0.5f, 0f, 0f, 1f);
+                GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0.5f, 1f);
+                playersprite.color = new Color(0f, 0f, 0.5f, 1f);
 
             }
             else
             {
-                GetComponent<SpriteRenderer>().color = Color.red;
-                playersprite.color = Color.red;
+                GetComponent<SpriteRenderer>().color = Color.blue;
+                playersprite.color = Color.blue;
             }
         }
         else if (isHolding == true && bigBulletCooldown > 0 && holdBefore <= 0)
@@ -113,7 +113,7 @@ public class Sniper : AbstractWeapon
         }
         else
         {
-            GetComponent<SpriteRenderer>().color = Color.white;
+            GetComponent<SpriteRenderer>().color = Color.yellow;
             playersprite.color = Color.black;
         }
 
@@ -157,7 +157,7 @@ public class Sniper : AbstractWeapon
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
 
         Vector2 initialDirection = (Vector2)(Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z) * Vector3.up);
-        rb.velocity = initialDirection * bulletSpeed;
+        rb.velocity = initialDirection * bulletSpeed * Time.fixedDeltaTime;
     }
 
     void BigShoot()

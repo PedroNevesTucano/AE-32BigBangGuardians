@@ -16,10 +16,14 @@ public class Player : MonoBehaviour
     private bool invincibility;
     public float iFrames;
     public float iFramesBase;
+    private float iFramesBlinking = 0.1f;
+    private float iFramesBlinkingBase;
     public bool canDash;
     public bool isPaused;
 
     private ShootProjectile sniperScript;
+
+    public SpriteRenderer spriteRenderer;
 
     private Vector3 direction;
 
@@ -36,6 +40,8 @@ public class Player : MonoBehaviour
         dashCooldown = 0;
         iFramesBase = iFrames;
         iFrames = 0;
+        iFramesBlinkingBase = iFramesBlinking;
+        iFramesBlinking = 0;
     }
 
     void Start()
@@ -148,6 +154,21 @@ public class Player : MonoBehaviour
         if (iFrames > 0)
         {
             iFrames -= Time.fixedDeltaTime;
+            iFramesBlinking -= Time.fixedDeltaTime;
+        }
+        else
+        {
+            spriteRenderer.enabled = true;
+        }
+
+        if ((iFrames > 0 && iFramesBlinking <= 0))
+        {
+            spriteRenderer.enabled = true;
+            iFramesBlinking = iFramesBlinkingBase;
+        }
+        else if (iFrames > 0 && iFramesBlinking > 0)
+        {
+            spriteRenderer.enabled = false;
         }
     }
 
