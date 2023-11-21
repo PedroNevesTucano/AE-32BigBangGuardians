@@ -3,7 +3,7 @@ public class trap : AbstractEnemy
 {
     public GameObject bigEnemyBulletPrefab;
     private float bigBulletSpeed = 2000;
-    private float bigBulletCooldown = 0.2f;
+    private float bigBulletCooldown = 0.7f;
     //this private field is set to 0 by default
     private float bigBulletCooldownBase;
 

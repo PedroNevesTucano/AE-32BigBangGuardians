@@ -1161,7 +1161,7 @@ PrefabInstance:
     - target: {fileID: 8757441710427990478, guid: 1c8f4c2bdb09b2046b74ecf72847d726, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1779320210}
+      objectReference: {fileID: 440292818}
     - target: {fileID: 8757441710427990478, guid: 1c8f4c2bdb09b2046b74ecf72847d726, type: 3}
       propertyPath: BigEnemyBulletPrefab
       value: 
@@ -1353,7 +1353,7 @@ PrefabInstance:
     - target: {fileID: 8757441710427990478, guid: 1c8f4c2bdb09b2046b74ecf72847d726, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1779320210}
+      objectReference: {fileID: 440292818}
     - target: {fileID: 8757441710427990478, guid: 1c8f4c2bdb09b2046b74ecf72847d726, type: 3}
       propertyPath: trapHealth
       value: 40
@@ -2307,7 +2307,7 @@ PrefabInstance:
     - target: {fileID: 8757441710427990478, guid: 1c8f4c2bdb09b2046b74ecf72847d726, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1779320210}
+      objectReference: {fileID: 440292818}
     - target: {fileID: 8757441710427990478, guid: 1c8f4c2bdb09b2046b74ecf72847d726, type: 3}
       propertyPath: trapHealth
       value: 40
@@ -3020,7 +3020,7 @@ PrefabInstance:
     - target: {fileID: 8757441710427990478, guid: 1c8f4c2bdb09b2046b74ecf72847d726, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1779320210}
+      objectReference: {fileID: 440292818}
     - target: {fileID: 8757441710427990478, guid: 1c8f4c2bdb09b2046b74ecf72847d726, type: 3}
       propertyPath: BigEnemyBulletPrefab
       value: 
@@ -3155,7 +3155,7 @@ PrefabInstance:
     - target: {fileID: 8757441710427990478, guid: 1c8f4c2bdb09b2046b74ecf72847d726, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1779320210}
+      objectReference: {fileID: 440292818}
     - target: {fileID: 8757441710427990478, guid: 1c8f4c2bdb09b2046b74ecf72847d726, type: 3}
       propertyPath: BigEnemyBulletPrefab
       value: 
@@ -4347,7 +4347,7 @@ PrefabInstance:
     - target: {fileID: 8757441710427990478, guid: 1c8f4c2bdb09b2046b74ecf72847d726, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1779320210}
+      objectReference: {fileID: 440292818}
     - target: {fileID: 8757441710427990478, guid: 1c8f4c2bdb09b2046b74ecf72847d726, type: 3}
       propertyPath: trapHealth
       value: 40
@@ -4646,7 +4646,7 @@ PrefabInstance:
     - target: {fileID: 8757441710427990478, guid: 1c8f4c2bdb09b2046b74ecf72847d726, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1779320210}
+      objectReference: {fileID: 440292818}
     - target: {fileID: 8757441710427990478, guid: 1c8f4c2bdb09b2046b74ecf72847d726, type: 3}
       propertyPath: trapHealth
       value: 40

@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab28d71e450f3a94d925e808e3af4200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 9045211416675226251, guid: 6ebe80dab947e8d41954c4665c960f0b, type: 3}
   enemyBulletPrefab: {fileID: 1844657377082393883, guid: e61001ad79a7d58449a0b61b803830ff, type: 3}
   bulletSpeed: 2000
   bulletCooldown: 0.2
@@ -152,6 +152,3 @@ MonoBehaviour:
   health: 40
   rb: {fileID: 0}
   bigEnemyBulletPrefab: {fileID: 7549427171570128245, guid: 2b617924f177fb84bbbf90070233cf97, type: 3}
-  bigBulletSpeed: 1500
-  bigBulletCooldown: 0.6
-  bigBulletCooldownBase: 0
