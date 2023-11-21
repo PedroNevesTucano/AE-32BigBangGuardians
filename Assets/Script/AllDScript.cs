@@ -1,25 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-public class AllDScript : MonoBehaviour
+public class AllDScript : AbstractEnemy
 {
-    // Start is called before the first frame update
-    public Transform player;
-    public GameObject EnemyBulletPrefab;
-    public float bulletSpeed = 40f;
-    public float bulletCooldown;
-    public float bulletCooldownBase;
-    public bool switchDirection;
-    public float trapHealth;
-    public float viewRange;
-
+    private bool switchDirection;
     private void Awake()
     {
         bulletCooldownBase = bulletCooldown;
         bulletCooldown = 0;
     }
-    void Start()
+    private void Start()
     {
         switchDirection = false;
     }
@@ -29,14 +17,30 @@ public class AllDScript : MonoBehaviour
         {
             bulletCooldown -= Time.fixedDeltaTime;
         }
-        void Shoot()
-        {
-            if (0 < bulletCooldown)
-            {
-                return;
-            }
-            bulletCooldown = bulletCooldownBase;
+        
+        Vector3 directionToPlayer = player.transform.position - transform.position;
+        float distanceToPlayer = directionToPlayer.magnitude;
 
+        if (health > 0)
+        {
+            if (distanceToPlayer <= viewRange)
+            {
+                Shoot();
+            }
+            if (health <= 39)
+            {
+                Shoot();
+            }
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    private protected override void Shoot()
+    {
+        if (CooldownChecker())
+        {
             if (switchDirection == false)
             {
                 Vector3 rightDirection = Vector3.right;
@@ -70,48 +74,18 @@ public class AllDScript : MonoBehaviour
                 switchDirection = false;
             }
         }
-
-        void ShootDirection(Vector3 direction)
-        {
-            float angle = Mathf.Atan2(direction.y, direction.x);
-            float angleDegrees = angle * Mathf.Rad2Deg;
-
-            GameObject bullet = Instantiate(EnemyBulletPrefab, transform.position, Quaternion.Euler(0, 0, angleDegrees));
-
-            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-            rb.velocity = direction.normalized * bulletSpeed * Time.fixedDeltaTime;
-        }
-
-        Vector3 directionToPlayer = player.position - transform.position;
-        float distanceToPlayer = directionToPlayer.magnitude;
-
-        if (trapHealth > 0)
-        {
-            if (distanceToPlayer <= viewRange)
-            {
-                Shoot();
-            }
-            if (trapHealth <= 39)
-            {
-                Shoot();
-            }
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    
+    
+    private void ShootDirection(Vector3 direction)
     {
-        if (collision.CompareTag("BulletTag"))
-        {
-            trapHealth -= 15;
-        }
-        if (collision.CompareTag("BigBulletTag"))
-        {
-            trapHealth -= 30;
-        }
+        float angle = Mathf.Atan2(direction.y, direction.x);
+        float angleDegrees = angle * Mathf.Rad2Deg;
+
+        GameObject bullet = Instantiate(enemyBulletPrefab, transform.position, Quaternion.Euler(0, 0, angleDegrees));
+        
+        rb = bullet.GetComponent<Rigidbody2D>();
+        rb.velocity = direction.normalized * bulletSpeed * Time.fixedDeltaTime;
     }
+    private new void OnTriggerEnter2D(Collider2D collision) => base.OnTriggerEnter2D(collision);
 }

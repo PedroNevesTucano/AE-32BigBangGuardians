@@ -1304,6 +1304,10 @@ PrefabInstance:
       value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 8757441710427990478, guid: 1c8f4c2bdb09b2046b74ecf72847d726, type: 3}
+      propertyPath: bulletCooldown
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8757441710427990478, guid: 1c8f4c2bdb09b2046b74ecf72847d726, type: 3}
       propertyPath: bigBulletCooldown
       value: 0.6
       objectReference: {fileID: 0}
@@ -1748,6 +1752,10 @@ PrefabInstance:
       value: AllDTrap
       objectReference: {fileID: 0}
     - target: {fileID: 8505290558371305197, guid: 0d2f4215b6ccc2a48b67ae849caa129c, type: 3}
+      propertyPath: health
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 8505290558371305197, guid: 0d2f4215b6ccc2a48b67ae849caa129c, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1779320210}
@@ -1761,6 +1769,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8505290558371305197, guid: 0d2f4215b6ccc2a48b67ae849caa129c, type: 3}
       propertyPath: EnemyBulletPrefab
+      value: 
+      objectReference: {fileID: 1844657377082393883, guid: e61001ad79a7d58449a0b61b803830ff, type: 3}
+    - target: {fileID: 8505290558371305197, guid: 0d2f4215b6ccc2a48b67ae849caa129c, type: 3}
+      propertyPath: enemyBulletPrefab
       value: 
       objectReference: {fileID: 1844657377082393883, guid: e61001ad79a7d58449a0b61b803830ff, type: 3}
     m_RemovedComponents: []
@@ -3316,6 +3328,10 @@ PrefabInstance:
       value: AllDTrap (1)
       objectReference: {fileID: 0}
     - target: {fileID: 8505290558371305197, guid: 0d2f4215b6ccc2a48b67ae849caa129c, type: 3}
+      propertyPath: health
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 8505290558371305197, guid: 0d2f4215b6ccc2a48b67ae849caa129c, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1779320210}
@@ -3325,6 +3341,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8505290558371305197, guid: 0d2f4215b6ccc2a48b67ae849caa129c, type: 3}
       propertyPath: EnemyBulletPrefab
+      value: 
+      objectReference: {fileID: 1844657377082393883, guid: e61001ad79a7d58449a0b61b803830ff, type: 3}
+    - target: {fileID: 8505290558371305197, guid: 0d2f4215b6ccc2a48b67ae849caa129c, type: 3}
+      propertyPath: enemyBulletPrefab
       value: 
       objectReference: {fileID: 1844657377082393883, guid: e61001ad79a7d58449a0b61b803830ff, type: 3}
     m_RemovedComponents: []
