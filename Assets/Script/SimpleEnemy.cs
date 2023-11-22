@@ -78,7 +78,7 @@ public class SimpleEnemy : AbstractEnemy
     }
 
     //Overriding an abstract method from the parent AbstractEnemy class
-    private protected override void Shoot()
+    protected override void Shoot()
     {
         if (CooldownChecker())
         {

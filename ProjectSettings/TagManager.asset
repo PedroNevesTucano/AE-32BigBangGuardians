@@ -12,6 +12,7 @@ TagManager:
   - BigEnemyBulletTag
   - SpawnTrigger
   - Lv1
+  - Oholder
   layers:
   - Default
   - TransparentFX
