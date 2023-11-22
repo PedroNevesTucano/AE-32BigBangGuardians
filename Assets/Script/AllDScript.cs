@@ -37,7 +37,7 @@ public class AllDScript : AbstractEnemy
             Destroy(gameObject);
         }
     }
-    private protected override void Shoot()
+    protected override void Shoot()
     {
         if (CooldownChecker())
         {
