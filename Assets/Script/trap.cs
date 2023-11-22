@@ -38,7 +38,7 @@ public class trap : AbstractEnemy
         }
     }
 
-    private protected override void Shoot()
+    protected override void Shoot()
     {
         if (CooldownChecker())
         {

@@ -16,7 +16,7 @@ public abstract class AbstractEnemy : MonoBehaviour
     from the class itself and from classes
     that are derived from this class and are in the same assembly
     */
-    private protected abstract void Shoot();
+    protected abstract void Shoot();
     private protected bool CooldownChecker()
     {
         if (bulletCooldown > 0)
@@ -27,7 +27,7 @@ public abstract class AbstractEnemy : MonoBehaviour
         return true;
     }
     
-    private protected void OnTriggerEnter2D(Collider2D collision)
+    protected void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("BulletTag"))
         {
