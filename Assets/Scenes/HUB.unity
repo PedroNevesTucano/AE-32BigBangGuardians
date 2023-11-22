@@ -578,6 +578,7 @@ MonoBehaviour:
   TransitionImage: {fileID: 202308881}
   hubTrigger: {fileID: 0}
   lv1Trigger: {fileID: 1671269017}
+  player: {fileID: 5645329683275776484}
   currentAmount: 100
   onStart: 0
 --- !u!1 &203991106
@@ -692,7 +693,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3407a9bda96b714791f327673a57a32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1253428833}
+  player: {fileID: 5645329683275776484}
   followSpeed: 10
   mouseOffset: 3
   sniper: {fileID: 480101275}
@@ -1533,11 +1534,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1211729568}
   m_CullTransparentMesh: 1
---- !u!4 &1253428833 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3314896194519661756, guid: 6ebe80dab947e8d41954c4665c960f0b, type: 3}
-  m_PrefabInstance: {fileID: 5645329683275776483}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1325641957
 GameObject:
   m_ObjectHideFlags: 0
@@ -2612,6 +2608,10 @@ PrefabInstance:
       propertyPath: spriteRenderer
       value: 
       objectReference: {fileID: 5645329683275776489}
+    - target: {fileID: 5989504067568881025, guid: 6ebe80dab947e8d41954c4665c960f0b, type: 3}
+      propertyPath: weaponSwitcher
+      value: 
+      objectReference: {fileID: 567857633}
     - target: {fileID: 6358903724459861241, guid: 6ebe80dab947e8d41954c4665c960f0b, type: 3}
       propertyPath: m_Sprite
       value: 

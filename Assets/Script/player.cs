@@ -19,11 +19,14 @@ public class Player : MonoBehaviour
     private float iFramesBlinking = 0.1f;
     private float iFramesBlinkingBase;
     public bool canDash;
+    public bool dead;
     public bool isPaused;
 
     private ShootProjectile sniperScript;
 
     public SpriteRenderer spriteRenderer;
+
+    public Weapon_Switcher weaponSwitcher;
 
     private Vector3 direction;
 
@@ -58,8 +61,11 @@ public class Player : MonoBehaviour
     {
         if (playerHealth <= 0)
         {
+            dead = true;
             playerHealth = 0;
-            SceneManager.LoadScene("Level1");
+            xAxyx = 0;
+            yAxyx = 0;
+            weaponSwitcher.gameObject.SetActive(false);
             return;
         }
 
@@ -87,7 +93,7 @@ public class Player : MonoBehaviour
             canDash = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && !IsDashing() && (xAxyx != 0 || yAxyx != 0))
+        if (Input.GetKeyDown(KeyCode.Space) && !IsDashing() && (xAxyx != 0 || yAxyx != 0) && !dead)
         {
             if (0 < dashCooldown)
             {
@@ -98,7 +104,7 @@ public class Player : MonoBehaviour
             tr.emitting = true;
         }
 
-        if (!IsDashing())
+        if (!IsDashing() && !dead)
         {
             rb.velocity = movement * speed;
             tr.emitting = false;
@@ -161,12 +167,12 @@ public class Player : MonoBehaviour
             spriteRenderer.enabled = true;
         }
 
-        if ((iFrames > 0 && iFramesBlinking <= 0))
+        if ((iFrames > 0 && iFramesBlinking <= 0 && !dead))
         {
             spriteRenderer.enabled = true;
             iFramesBlinking = iFramesBlinkingBase;
         }
-        else if (iFrames > 0 && iFramesBlinking > 0)
+        else if (iFrames > 0 && iFramesBlinking > 0 && !dead)
         {
             spriteRenderer.enabled = false;
         }

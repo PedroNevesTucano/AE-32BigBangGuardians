@@ -7,6 +7,7 @@ public class TransitionUpdate : MonoBehaviour
     public Image TransitionImage;
     public HubTriggerScript hubTrigger;
     public Lv1 lv1Trigger;
+    public Player player;
     public float currentAmount = 100f;
     public bool onStart;
 
@@ -46,6 +47,17 @@ public class TransitionUpdate : MonoBehaviour
         }
 
         if (lv1Trigger != null && lv1Trigger.switchToTransitionLv1 == true && currentAmount == 100)
+        {
+            SceneManager.LoadScene("Level1");
+        }
+
+        if (player.dead == true)
+        {
+            currentAmount = Mathf.Clamp(currentAmount + Time.deltaTime * 200, 0f, 100f);
+            TransitionImage.fillAmount = currentAmount / 100f;
+        }
+
+        if (player.dead && currentAmount == 100)
         {
             SceneManager.LoadScene("Level1");
         }

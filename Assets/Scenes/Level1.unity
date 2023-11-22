@@ -941,7 +941,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3407a9bda96b714791f327673a57a32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1779320210}
+  player: {fileID: 1608231032}
   followSpeed: 10
   mouseOffset: 3
   sniper: {fileID: 1654623634}
@@ -2799,6 +2799,7 @@ MonoBehaviour:
   TransitionImage: {fileID: 1449019264}
   hubTrigger: {fileID: 772167253}
   lv1Trigger: {fileID: 0}
+  player: {fileID: 1608231032}
   currentAmount: 100
   onStart: 0
 --- !u!114 &1449019264
@@ -3302,6 +3303,10 @@ PrefabInstance:
       propertyPath: spriteRenderer
       value: 
       objectReference: {fileID: 1779320212}
+    - target: {fileID: 5989504067568881025, guid: 6ebe80dab947e8d41954c4665c960f0b, type: 3}
+      propertyPath: weaponSwitcher
+      value: 
+      objectReference: {fileID: 17521994}
     - target: {fileID: 9045211416675226251, guid: 6ebe80dab947e8d41954c4665c960f0b, type: 3}
       propertyPath: m_Name
       value: Player
@@ -3603,11 +3608,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3991676922636429714, guid: 8d2bb19adaeb95148a6fe93f33cb0165, type: 3}
   m_PrefabInstance: {fileID: 1944522997}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1779320210 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3314896194519661756, guid: 6ebe80dab947e8d41954c4665c960f0b, type: 3}
-  m_PrefabInstance: {fileID: 1608231031}
   m_PrefabAsset: {fileID: 0}
 --- !u!212 &1779320212 stripped
 SpriteRenderer:
