@@ -1,16 +1,21 @@
 using System;
+using System.Collections;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UIElements.Experimental;
 
 public class Enemyarch : AbstractEnemy
 {
     private float movementSpeed = 250;
     private bool chasing;
+    private float shootInterval = 0.1f;
+    private bool canShoot = true;
+    public bool firstcycle = true;
+    private float iterations = 19;
     private void Awake()
     {
-        bulletCooldownBase = bulletCooldown;
-        bulletCooldown = 1.5f;
+        
     }
     private void Start()
     {
@@ -20,9 +25,9 @@ public class Enemyarch : AbstractEnemy
 
     private void Update()
     {
-        if (health <= 0)
+        if (Vector2.Distance(transform.position, player.transform.position) <= viewRange && canShoot)
         {
-            Destroy(gameObject);
+            StartCoroutine(ShootBullet());
         }
     }
 
@@ -34,7 +39,7 @@ public class Enemyarch : AbstractEnemy
 
         if (bulletCooldown > 0 && chasing)
         {
-            bulletCooldown -= Time.fixedDeltaTime;
+            //bulletCooldown -= Time.fixedDeltaTime;
         }
         if (distanceToPlayer <= viewRange)
         {
@@ -54,17 +59,14 @@ public class Enemyarch : AbstractEnemy
         {
             if (distanceToPlayer >= 3)
             {
-                Shoot();
                 rb.velocity = movementSpeed * Time.fixedDeltaTime * movementDirection;
             }
             else if (distanceToPlayer < 2f)
             {
-                Shoot();
                 rb.velocity = movementSpeed * Time.fixedDeltaTime * -movementDirection;
             }
             else
-            {
-                Shoot();
+            {        
                 rb.velocity = Vector3.zero;
             }
         }
@@ -75,6 +77,11 @@ public class Enemyarch : AbstractEnemy
     }
 
     protected override void Shoot()
+    {
+
+    }
+
+    /*protected override void Shoot()
     {
         if (CooldownChecker())
         {
@@ -98,8 +105,57 @@ public class Enemyarch : AbstractEnemy
                 bulletRb = bullet.GetComponent<Rigidbody2D>();
                 bulletRb.velocity = bulletSpeed * Time.fixedDeltaTime * actualdirection;
                 angles += rotation;
-                angleDegrees -= rotation;
+                angleDegrees += rotation;
             }
+        }
+    }*/
+
+    private IEnumerator ShootBullet()
+    {
+        canShoot = false;
+        Vector3 direction = (player.transform.position - transform.position).normalized;
+        float angle = Mathf.Atan2(direction.y, direction.x);
+        float angleDegrees = angle * Mathf.Rad2Deg;
+        float angleoffset = 20;
+
+
+        float actualangle = 1;
+        for (int i = 0; i < iterations; i++)
+        {
+            Quaternion rotationMinus10Degrees = Quaternion.Euler(0, 0, actualangle);
+            Vector2 actualdirection = rotationMinus10Degrees * direction.normalized;
+
+            GameObject bullet = Instantiate(enemyBulletPrefab, transform.position, Quaternion.Euler(0, 0, angleDegrees));
+            Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
+            bulletRb.velocity = actualdirection.normalized * bulletSpeed * Time.fixedDeltaTime;
+
+            // Wait for the specified interval before shooting the next bullet
+            yield return new WaitForSeconds(shootInterval);
+
+            // Increment the angle for the next bullet
+            if (firstcycle == true)
+            {
+                actualangle += angleoffset;
+                angleDegrees += angleoffset;
+            }
+            else
+            {
+                actualangle += angleoffset * -1;
+                angleDegrees += angleoffset * -1;
+            }
+        }
+
+        // Cooldown before the next cycle
+        yield return new WaitForSeconds(bulletCooldown);
+        canShoot = true;
+        
+        if (firstcycle == true)
+        {
+            firstcycle = false;
+        }
+        else
+        {
+            firstcycle = true;
         }
     }
 }
