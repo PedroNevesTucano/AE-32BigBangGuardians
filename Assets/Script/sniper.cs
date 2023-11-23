@@ -1,3 +1,4 @@
+using System;
 using UnityEditor.Build;
 using UnityEngine;
 
@@ -143,6 +144,12 @@ public class Sniper : AbstractWeapon
         {
             isRightMouseButtonDown = false;
         }
+        
+        
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            Reload();
+        }
     }
 
     private protected override void Shoot()
@@ -184,5 +191,10 @@ public class Sniper : AbstractWeapon
 
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.velocity = direction * bigBulletSpeed * Time.fixedDeltaTime;
+    }
+
+    private protected void Reload()
+    {
+        base.Reload();
     }
 }

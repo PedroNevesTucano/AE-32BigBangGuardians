@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class AbstractWeapon : MonoBehaviour
@@ -11,5 +9,12 @@ public abstract class AbstractWeapon : MonoBehaviour
     public float cooldown;
     public float counter;
     public int capacity;
+    public int maxCapacity;
+    
     private protected abstract void Shoot();
+    
+    private protected void Reload()
+    {
+        capacity = maxCapacity;
+    }
 }

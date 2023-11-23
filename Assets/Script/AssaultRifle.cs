@@ -18,6 +18,11 @@ public class AssaultRifle : AbstractWeapon
             counter = 0;
             isshooting = false;
         }
+        
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            Reload();
+        }
     }
     
     private protected override void Shoot()
@@ -35,4 +40,10 @@ public class AssaultRifle : AbstractWeapon
             isshooting = true;
         }
     }
+    
+    private protected void Reload()
+    {
+        base.Reload();
+    }
+    
 }

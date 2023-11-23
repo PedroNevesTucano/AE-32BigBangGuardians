@@ -23,6 +23,12 @@ public class Shotgun : AbstractWeapon
             counter = 0;
             isshooting = false;
         }
+        
+        
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            Reload();
+        }
     }
     private protected override void Shoot()
     {
@@ -49,5 +55,10 @@ public class Shotgun : AbstractWeapon
             rb2.velocity = initialDirection3 * bulletSpeed * Time.fixedDeltaTime;
             isshooting = true;
         }
+    }
+    
+    private protected void Reload()
+    {
+        base.Reload();
     }
 }
