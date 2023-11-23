@@ -5,6 +5,7 @@ public class SpawnArea : MonoBehaviour
     // Start is called before the first frame update
     public float timer;
     public GameObject enemyPrefab;
+    public Door door;
 
     private void FixedUpdate()
     {
@@ -24,6 +25,7 @@ public class SpawnArea : MonoBehaviour
         if (timer <= 0)
         {
             Instantiate(enemyPrefab, transform.position, Quaternion.Euler(0, 0, 0));
+            door.OnEnemySpawned();
             Destroy(gameObject);
         }
     }

@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 public class SimpleEnemy : AbstractEnemy
 {
@@ -19,12 +20,14 @@ public class SimpleEnemy : AbstractEnemy
     {
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player");
+        door = GameObject.FindGameObjectWithTag("door");
     }
 
     private void Update()
     {
         if (health <= 0)
         {
+            door.GetComponent<Door>().OnEnemyDestroyed();
             Destroy(gameObject);
         }
     }

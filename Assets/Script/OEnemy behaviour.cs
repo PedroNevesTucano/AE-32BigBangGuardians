@@ -2,19 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements.Experimental;
-
-public class OEnemybehaviour : MonoBehaviour
+ 
+public class OEnemybehaviour : AbstractEnemy
 {
-    public Transform player;
-    public float viewRange;
     public bool chasing;
-    private Rigidbody2D rb;
-    public float health;
     public float movementSpeed;
-    public float bulletCooldown;
-    public float bulletCooldownBase;
-    public float bulletSpeed = 30f;
-    public GameObject EnemyBulletPrefab;
+    public Transform[] teleportPositions;
+    private int currentPositionIndex = 0;
+    private float timer = 2;
+
+
 
     // Start is called before the first frame update
     private void Awake()
@@ -26,55 +23,59 @@ public class OEnemybehaviour : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void FixedUpdate()
     {
-        Vector3 directionToPlayer = player.position - transform.position;
+        Vector3 directionToPlayer = player.transform.position - transform.position;
         float distanceToPlayer = directionToPlayer.magnitude;
-        Vector3 movementDirection = directionToPlayer.normalized;
+        Debug.Log(distanceToPlayer);
 
-        if (bulletCooldown > 0 && chasing)
+
+        if (bulletCooldown > 0)
         {
             bulletCooldown -= Time.fixedDeltaTime;
         }
-        if (distanceToPlayer <= viewRange)
+
+        if (distanceToPlayer <= 10)
         {
-            chasing = true;
+            Shoot();
         }
 
-        if (chasing || health <= 29)
+        
+    }
+
+    void Update()
+    {
+        if (timer >= 2)
         {
-            if (distanceToPlayer >= 3)
-            {
-                Shoot();
-                rb.velocity = movementDirection * movementSpeed * Time.fixedDeltaTime;
-            }
-            else if (distanceToPlayer < 2f)
-            {
-                Shoot();
-                rb.velocity = -movementDirection * movementSpeed * Time.fixedDeltaTime;
-            }
-            else
-            {
-                Shoot();
-                rb.velocity = Vector3.zero;
-            }
+            TeleportToNextPosition();
+            timer = 0;
         }
-        else
+        timer += Time.deltaTime;
+        if (currentPositionIndex == teleportPositions.Length)
         {
-            rb.velocity = Vector3.zero;
+            currentPositionIndex = 0;
         }
     }
 
-    public void Shoot()
+    void TeleportToNextPosition()
+    {
+        if (teleportPositions.Length == 0)
+        {
+            Debug.LogError("No teleport positions assigned.");
+            return;
+        }
+
+        transform.position = teleportPositions[currentPositionIndex].position;
+        currentPositionIndex = currentPositionIndex + 1;
+
+    }
+
+
+    protected override void Shoot()
     {
         if (0 < bulletCooldown)
         {
@@ -82,12 +83,12 @@ public class OEnemybehaviour : MonoBehaviour
         }
         bulletCooldown = bulletCooldownBase;
 
-        Vector3 direction = (player.position - transform.position).normalized;
+        Vector3 direction = (player.transform.position - transform.position).normalized;
 
         float angle = Mathf.Atan2(direction.y, direction.x);
         float angleDegrees = angle * Mathf.Rad2Deg;
 
-        GameObject bullet = Instantiate(EnemyBulletPrefab, transform.position, Quaternion.Euler(0, 0, angleDegrees));
+        GameObject bullet = Instantiate(enemyBulletPrefab, transform.position, Quaternion.Euler(0, 0, angleDegrees));
         Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
         bulletRb.velocity = direction * bulletSpeed * Time.fixedDeltaTime;
     }

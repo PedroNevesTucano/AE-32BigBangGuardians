@@ -46,15 +46,6 @@ public class Enemyarch : AbstractEnemy
             chasing = true;
         }
 
-        if (bulletCooldown < 0.2f)
-        {
-            GetComponent<SpriteRenderer>().color = Color.red;
-        }
-        else
-        {
-            GetComponent<SpriteRenderer>().color = new Color(0.5f, 0f, 0f, 1f);
-        }
-
         if (chasing || health <= 29)
         {
             if (distanceToPlayer >= 3)

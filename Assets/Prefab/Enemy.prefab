@@ -179,3 +179,4 @@ MonoBehaviour:
   viewRange: 250
   health: 30
   rb: {fileID: 0}
+  door: {fileID: 0}

@@ -11,12 +11,15 @@ public abstract class AbstractEnemy : MonoBehaviour
     public float viewRange;
     public float health;
     public Rigidbody2D rb;
-    
+    protected GameObject door;
+
     /*private protected provides access to a class member
     from the class itself and from classes
     that are derived from this class and are in the same assembly
     */
     protected abstract void Shoot();
+
+
     private protected bool CooldownChecker()
     {
         if (bulletCooldown > 0)
