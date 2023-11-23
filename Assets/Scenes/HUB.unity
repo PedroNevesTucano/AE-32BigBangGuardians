@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 36466933}
   - component: {fileID: 36466936}
   - component: {fileID: 36466935}
-  - component: {fileID: 36466934}
+  - component: {fileID: 36466937}
   m_Layer: 5
   m_Name: ChargedUI
   m_TagString: Untagged
@@ -161,21 +161,6 @@ RectTransform:
   m_AnchoredPosition: {x: -37.999878, y: 9.999999}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &36466934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 36466932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aab6b8f9d3f1b042812f7418a17729c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WeaponSwitcher: {fileID: 567857633}
-  ChargedUI: {fileID: 36466935}
-  sniper: {fileID: 480101277}
 --- !u!114 &36466935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,6 +199,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 36466932}
   m_CullTransparentMesh: 1
+--- !u!114 &36466937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36466932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14670102cca00bb459c1877de7214132, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeaponSwitcher: {fileID: 567857633}
+  SniperUIIndicator: {fileID: 2107409429}
+  ChargedUI: {fileID: 36466935}
+  sniper: {fileID: 480101277}
+  ShotgunUIIndicator: {fileID: 0}
+  shotgun: {fileID: 0}
+  uiType: 1
 --- !u!1 &64361324
 GameObject:
   m_ObjectHideFlags: 0
@@ -1647,7 +1651,7 @@ GameObject:
   - component: {fileID: 1333923979}
   - component: {fileID: 1333923982}
   - component: {fileID: 1333923981}
-  - component: {fileID: 1333923980}
+  - component: {fileID: 1333923983}
   m_Layer: 5
   m_Name: ShotgunUI
   m_TagString: Untagged
@@ -1674,21 +1678,6 @@ RectTransform:
   m_AnchoredPosition: {x: -96.99988, y: 9.999999}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1333923980
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1333923978}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 117ff0b3b9d29ea478a5c01ab93626b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WeaponSwitcher: {fileID: 567857633}
-  ShotgunUIIndicator: {fileID: 1333923981}
-  shotgun: {fileID: 405802900}
 --- !u!114 &1333923981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1727,6 +1716,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1333923978}
   m_CullTransparentMesh: 1
+--- !u!114 &1333923983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333923978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14670102cca00bb459c1877de7214132, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeaponSwitcher: {fileID: 567857633}
+  SniperUIIndicator: {fileID: 2107409429}
+  ChargedUI: {fileID: 36466935}
+  sniper: {fileID: 480101277}
+  ShotgunUIIndicator: {fileID: 1333923981}
+  shotgun: {fileID: 405802900}
+  uiType: 2
 --- !u!1 &1398284445
 GameObject:
   m_ObjectHideFlags: 0
@@ -2493,7 +2501,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponSwitcher: {fileID: 567857633}
   SniperUIIndicator: {fileID: 2107409429}
+  ChargedUI: {fileID: 36466935}
   sniper: {fileID: 480101277}
+  ShotgunUIIndicator: {fileID: 0}
+  shotgun: {fileID: 0}
+  uiType: 0
 --- !u!114 &2107409429
 MonoBehaviour:
   m_ObjectHideFlags: 0
