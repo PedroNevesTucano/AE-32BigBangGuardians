@@ -11,6 +11,7 @@ public class Weapon_Switcher : MonoBehaviour
     void Start()
     {
         transform.GetChild(1).gameObject.SetActive(false);
+        transform.GetChild(2).gameObject.SetActive(false);
     }
 
     // Update is called once per frame

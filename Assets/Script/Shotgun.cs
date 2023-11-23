@@ -1,12 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Shotgun : AbstractWeapon
 {
-    private void Update()
+    private void FixedUpdate()
     {
         Shoot();
+    }
+
+    private void Update()
+    {
 
         if (isshooting)
         {
@@ -21,8 +26,9 @@ public class Shotgun : AbstractWeapon
     }
     private protected override void Shoot()
     {
-        if (Input.GetMouseButtonDown(0) && counter <= 0)
+        if (Input.GetMouseButtonDown(0) && counter <= 0 && capacity > 0)
         {
+            capacity -= 1;
             // Instantiate bullets with the desired rotation
             GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, firePoint.rotation.eulerAngles.z + 90));
             GameObject bullet2 = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, firePoint.rotation.eulerAngles.z + 10 + 90));

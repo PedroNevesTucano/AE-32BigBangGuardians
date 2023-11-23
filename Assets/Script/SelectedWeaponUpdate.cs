@@ -19,6 +19,9 @@ public class SelectedWeaponUpdate : MonoBehaviour
         } else if (WeaponSwitcher.currentWeapon == 1)
         {
             SelectedWeapon.color = Color.red;
+        } else if (WeaponSwitcher.currentWeapon == 2)
+        {
+            SelectedWeapon.color = new Color(0f, 1f, 0.6824f, 1f);;
         }
     }
 }

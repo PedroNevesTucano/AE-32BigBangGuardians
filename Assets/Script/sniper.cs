@@ -61,13 +61,13 @@ public class Sniper : AbstractWeapon
             holdBefore = holdBeforeBase;
         }
 
-        if (shootFixed)
+        if (shootFixed && capacity > 0)
         {
             Shoot();
             shootFixed = false;
         }
 
-        if (bigShootFixed)
+        if (bigShootFixed && capacity > 0)
         {
             BigShoot();
             bigShootFixed = false;
@@ -147,6 +147,8 @@ public class Sniper : AbstractWeapon
 
     private protected override void Shoot()
     {
+        capacity -= 1;
+        
         if (0 < bulletCooldown)
         {
             return;
@@ -162,6 +164,8 @@ public class Sniper : AbstractWeapon
 
     void BigShoot()
     {
+        capacity -= 1;
+        
         if (0 < bigBulletCooldown)
         {
             return;
