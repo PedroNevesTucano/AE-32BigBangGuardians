@@ -68,6 +68,12 @@ public class Sniper : AbstractWeapon
             shootFixed = false;
         }
 
+        if (capacity <= 0)
+        {
+            shootFixed = false;
+            bigShootFixed = false;
+        }
+        
         if (bigShootFixed && capacity > 0)
         {
             BigShoot();
@@ -154,13 +160,12 @@ public class Sniper : AbstractWeapon
 
     private protected override void Shoot()
     {
-        capacity -= 1;
-        
         if (0 < bulletCooldown)
         {
             return;
         }
         bulletCooldown = bulletCooldownBase;
+        capacity -= 1;
         GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, firePoint.rotation.eulerAngles.z + 90));
 
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
@@ -171,13 +176,12 @@ public class Sniper : AbstractWeapon
 
     void BigShoot()
     {
-        capacity -= 1;
-        
         if (0 < bigBulletCooldown)
         {
             return;
         }
         bigBulletCooldown = bigBulletCooldownBase;
+        capacity -= 1;
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0;
 

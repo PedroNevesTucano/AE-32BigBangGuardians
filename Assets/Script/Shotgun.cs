@@ -34,7 +34,7 @@ public class Shotgun : AbstractWeapon
     {
         if (Input.GetMouseButtonDown(0) && counter <= 0 && capacity > 0)
         {
-            capacity -= 1;
+           
             // Instantiate bullets with the desired rotation
             GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, firePoint.rotation.eulerAngles.z + 90));
             GameObject bullet2 = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, firePoint.rotation.eulerAngles.z + 10 + 90));
@@ -54,6 +54,7 @@ public class Shotgun : AbstractWeapon
             rb1.velocity = initialDirection2 * bulletSpeed * Time.fixedDeltaTime;
             rb2.velocity = initialDirection3 * bulletSpeed * Time.fixedDeltaTime;
             isshooting = true;
+            capacity -= 1;
         }
     }
     

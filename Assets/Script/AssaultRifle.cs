@@ -29,7 +29,6 @@ public class AssaultRifle : AbstractWeapon
     {
         if (Input.GetMouseButton(0)&& counter <= 0 && capacity > 0)
         {
-            capacity -= 1;
             
             GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, firePoint.rotation.eulerAngles.z + 90));
 
@@ -38,6 +37,7 @@ public class AssaultRifle : AbstractWeapon
             Vector2 initialDirection = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z) * Vector3.up;
             rb.velocity = initialDirection * bulletSpeed * Time.fixedDeltaTime;
             isshooting = true;
+            capacity -= 1;
         }
     }
     
