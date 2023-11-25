@@ -5,7 +5,7 @@ public class SpawnArea : MonoBehaviour
     // Start is called before the first frame update
     public float timer;
     public GameObject enemyPrefab;
-    public Door door;
+    private GameObject door;
 
     private void FixedUpdate()
     {
@@ -13,6 +13,10 @@ public class SpawnArea : MonoBehaviour
         {
             timer -= Time.fixedDeltaTime;
         }
+    }
+    private void Start()
+    {
+        door = GameObject.FindGameObjectWithTag("door");
     }
 
     // Update is called once per frame
@@ -25,7 +29,7 @@ public class SpawnArea : MonoBehaviour
         if (timer <= 0)
         {
             Instantiate(enemyPrefab, transform.position, Quaternion.Euler(0, 0, 0));
-            door.OnEnemySpawned();
+            door.GetComponent<Door>().OnEnemySpawned();
             Destroy(gameObject);
         }
     }

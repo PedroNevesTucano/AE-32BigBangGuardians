@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpawnTrigger : MonoBehaviour
 {
     public GameObject spawnAreaPrefab;
+    public GameObject Door;
 
     private float spawnCooldown = 0.1f;
     private bool triggered;
@@ -34,11 +35,13 @@ public class SpawnTrigger : MonoBehaviour
     {
         if (triggered == true)
         {
+            
             if (spawnPosition != Vector3.zero && spawnAreaOneInstantiated == false)
             {
                 GameObject spawnArea = Instantiate(spawnAreaPrefab, spawnPosition, Quaternion.Euler(0, 0, 0));
                 spawnCooldown = Random.Range(0.1f, 1f);
                 spawnAreaOneInstantiated = true;
+                GameObject dor = Instantiate(Door, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0));
             }
             if (spawnCooldown <= 0 && spawnPosition2 != Vector3.zero && spawnAreaTwoInstantiated == false)
             {
