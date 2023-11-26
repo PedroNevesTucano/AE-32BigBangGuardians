@@ -29,7 +29,10 @@ public class SpawnArea : MonoBehaviour
         if (timer <= 0)
         {
             Instantiate(enemyPrefab, transform.position, Quaternion.Euler(0, 0, 0));
-            door.GetComponent<Door>().OnEnemySpawned();
+            if (door != null) 
+            { 
+                door.GetComponent<Door>().OnEnemySpawned(); 
+            }
             Destroy(gameObject);
         }
     }

@@ -72,35 +72,6 @@ public class Enemyarch : AbstractEnemy
 
     }
 
-    /*protected override void Shoot()
-    {
-        if (CooldownChecker())
-        {
-            int rotation = 10;
-            int angles = 0;
-
-            for(int i = 0; i < 3; i++)
-            {
-
-                Quaternion rotationDegrees = Quaternion.Euler(0, 0, angles);
-                Vector2 direction = (player.transform.position - transform.position).normalized;
-                Vector2 actualdirection = rotationDegrees * direction;
-
-                float angle = Mathf.Atan2(direction.y, direction.x);
-                float angleDegrees = angle * Mathf.Rad2Deg;
-
-                GameObject bullet = Instantiate(enemyBulletPrefab, transform.position, Quaternion.Euler(0, 0, angleDegrees));
-
-                Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
-
-                bulletRb = bullet.GetComponent<Rigidbody2D>();
-                bulletRb.velocity = bulletSpeed * Time.fixedDeltaTime * actualdirection;
-                angles += rotation;
-                angleDegrees += rotation;
-            }
-        }
-    }*/
-
     private IEnumerator ShootBullet()
     {
         canShoot = false;

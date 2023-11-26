@@ -27,7 +27,10 @@ public class SimpleEnemy : AbstractEnemy
     {
         if (health <= 0)
         {
-            door.GetComponent<Door>().OnEnemyDestroyed();
+            if (door != null) 
+            { 
+                door.GetComponent<Door>().OnEnemyDestroyed(); 
+            }
             Destroy(gameObject);
         }
     }
