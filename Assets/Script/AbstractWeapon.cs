@@ -11,9 +11,9 @@ public abstract class AbstractWeapon : MonoBehaviour
     public int capacity;
     public int maxCapacity;
     
-    private protected abstract void Shoot();
+    protected abstract void Shoot();
     
-    private protected void Reload()
+    protected virtual void Reload()
     {
         capacity = maxCapacity;
     }

@@ -45,7 +45,7 @@ public class SimpleEnemy : AbstractEnemy
         {
             bulletCooldown -= Time.fixedDeltaTime;
         }
-        if (distanceToPlayer <= viewRange)
+        else if (distanceToPlayer <= viewRange)
         {
             chasing = true;
         }
@@ -110,5 +110,5 @@ public class SimpleEnemy : AbstractEnemy
     A method in the derived class marked with new won't be called when using
     a base class variable for an object of the derived class. The base class method will be called.
     */
-    private new void OnTriggerEnter2D(Collider2D collision) => base.OnTriggerEnter2D(collision);
+    //protected override void OnTriggerEnter2D(Collider2D collision) => base.OnTriggerEnter2D(collision);
 }

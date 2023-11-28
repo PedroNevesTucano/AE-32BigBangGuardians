@@ -133,6 +133,7 @@ MonoBehaviour:
   cooldown: 1
   counter: 0
   capacity: 5
+  maxCapacity: 5
   bigBulletPrefab: {fileID: 5117242136958326029, guid: 313543ac4979b6547ac66c060086ce77, type: 3}
   bigBulletSpeed: 1500
   bulletCooldown: 1
@@ -251,6 +252,7 @@ MonoBehaviour:
   cooldown: 0.3
   counter: 0
   capacity: 30
+  maxCapacity: 3
 --- !u!1 &5921437548430955209
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,3 +418,4 @@ MonoBehaviour:
   cooldown: 5
   counter: 0
   capacity: 5
+  maxCapacity: 5

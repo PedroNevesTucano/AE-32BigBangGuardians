@@ -30,7 +30,7 @@ public class Shotgun : AbstractWeapon
             Reload();
         }
     }
-    private protected override void Shoot()
+    protected override void Shoot()
     {
         if (Input.GetMouseButtonDown(0) && counter <= 0 && capacity > 0)
         {
@@ -58,7 +58,7 @@ public class Shotgun : AbstractWeapon
         }
     }
     
-    private protected void Reload()
+    protected void Reload()
     {
         base.Reload();
     }

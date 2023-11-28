@@ -13,6 +13,7 @@ TagManager:
   - SpawnTrigger
   - Lv1
   - Oholder
+  - sniper
   layers:
   - Default
   - TransparentFX

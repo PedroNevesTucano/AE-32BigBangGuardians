@@ -25,7 +25,7 @@ public class AssaultRifle : AbstractWeapon
         }
     }
     
-    private protected override void Shoot()
+    protected override void Shoot()
     {
         if (Input.GetMouseButton(0)&& counter <= 0 && capacity > 0)
         {
@@ -41,7 +41,7 @@ public class AssaultRifle : AbstractWeapon
         }
     }
     
-    private protected void Reload()
+    protected void Reload()
     {
         base.Reload();
     }

@@ -157,8 +157,7 @@ public class Sniper : AbstractWeapon
             Reload();
         }
     }
-
-    private protected override void Shoot()
+    protected override void Shoot()
     {
         if (0 < bulletCooldown)
         {
@@ -197,7 +196,7 @@ public class Sniper : AbstractWeapon
         rb.velocity = direction * bigBulletSpeed * Time.fixedDeltaTime;
     }
 
-    private protected void Reload()
+     protected override void Reload()
     {
         base.Reload();
     }

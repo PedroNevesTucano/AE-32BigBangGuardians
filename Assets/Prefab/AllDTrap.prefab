@@ -148,7 +148,6 @@ MonoBehaviour:
   bulletSpeed: 2000
   bulletCooldown: 0.2
   bulletCooldownBase: 0
-  viewRange: 0
-  health: 0
+  viewRange: 1
+  health: 40
   rb: {fileID: 0}
-  switchDirection: 0

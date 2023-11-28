@@ -19,7 +19,7 @@ public class trap : AbstractEnemy
     {
         if (health > 0)
         {
-            if (health >= 20)
+            if (health > 20)
             {
                 Shoot();
             }
@@ -57,21 +57,18 @@ public class trap : AbstractEnemy
     
     private void TargetedShoot()
     {
-        if (0 < bigBulletCooldown)
+        if (CooldownChecker())
         {
-            return;
+            Vector3 direction = (player.transform.position - transform.position).normalized;
+
+            float angle = Mathf.Atan2(direction.y, direction.x);
+            float angleDegrees = angle * Mathf.Rad2Deg;
+
+            GameObject bullet = Instantiate(bigEnemyBulletPrefab, transform.position,Quaternion.Euler(0, 0, angleDegrees));
+
+            rb = bullet.GetComponent<Rigidbody2D>();
+            rb.velocity = direction * bigBulletSpeed * Time.fixedDeltaTime;
         }
-        bigBulletCooldown = bigBulletCooldownBase;
-        
-        Vector3 direction = (player.transform.position - transform.position).normalized;
-
-        float angle = Mathf.Atan2(direction.y, direction.x);
-        float angleDegrees = angle * Mathf.Rad2Deg;
-
-        GameObject bullet = Instantiate(bigEnemyBulletPrefab, transform.position, Quaternion.Euler(0, 0, angleDegrees));
-
-        rb = bullet.GetComponent<Rigidbody2D>();
-        rb.velocity = direction * bigBulletSpeed * Time.fixedDeltaTime;
     }
     private new void OnTriggerEnter2D(Collider2D collision) => base.OnTriggerEnter2D(collision);
 }
