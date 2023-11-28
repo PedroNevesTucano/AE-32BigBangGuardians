@@ -158,7 +158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -37.999878, y: 9.999999}
+  m_AnchoredPosition: {x: -38, y: 10}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &36466935
@@ -698,9 +698,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 5645329683275776484}
-  followSpeed: 10
-  mouseOffset: 3
   sniper: {fileID: 480101275}
+  distance: 0
 --- !u!114 &362012589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1675,7 +1674,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -96.99988, y: 9.999999}
+  m_AnchoredPosition: {x: -97, y: 10}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1333923981
@@ -2607,6 +2606,18 @@ PrefabInstance:
     - target: {fileID: 5245486531423521000, guid: 6ebe80dab947e8d41954c4665c960f0b, type: 3}
       propertyPath: bulletSpeed
       value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5245486531423521000, guid: 6ebe80dab947e8d41954c4665c960f0b, type: 3}
+      propertyPath: bulletCooldown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5245486531423521000, guid: 6ebe80dab947e8d41954c4665c960f0b, type: 3}
+      propertyPath: requiredHoldTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5245486531423521000, guid: 6ebe80dab947e8d41954c4665c960f0b, type: 3}
+      propertyPath: bigBulletCooldown
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5295724587825901659, guid: 6ebe80dab947e8d41954c4665c960f0b, type: 3}
       propertyPath: bulletSpeed

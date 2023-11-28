@@ -21,8 +21,7 @@ public class TransitionUpdate : MonoBehaviour
     {
         if (onStart)
         {
-            currentAmount = Mathf.Clamp(currentAmount - Time.deltaTime * 200, 0f, 100f);
-            TransitionImage.fillAmount = currentAmount / 100f;
+            OpenTransition();
         }
         if (currentAmount <= 0 && onStart == true)
         {
@@ -31,8 +30,7 @@ public class TransitionUpdate : MonoBehaviour
 
         if (hubTrigger != null && hubTrigger.switchToTransition == true)
         {
-            currentAmount = Mathf.Clamp(currentAmount + Time.deltaTime * 200, 0f, 100f);
-            TransitionImage.fillAmount = currentAmount / 100f;
+            CloseTransition();
         }
 
         if (hubTrigger != null && hubTrigger.switchToTransition == true && currentAmount == 100)
@@ -42,8 +40,7 @@ public class TransitionUpdate : MonoBehaviour
 
         if (lv1Trigger != null && lv1Trigger.switchToTransitionLv1 == true)
         {
-            currentAmount = Mathf.Clamp(currentAmount + Time.deltaTime * 200, 0f, 100f);
-            TransitionImage.fillAmount = currentAmount / 100f;
+            CloseTransition();
         }
 
         if (lv1Trigger != null && lv1Trigger.switchToTransitionLv1 == true && currentAmount == 100)
@@ -53,13 +50,24 @@ public class TransitionUpdate : MonoBehaviour
 
         if (player.dead == true)
         {
-            currentAmount = Mathf.Clamp(currentAmount + Time.deltaTime * 200, 0f, 100f);
-            TransitionImage.fillAmount = currentAmount / 100f;
+            CloseTransition();
         }
 
         if (player.dead && currentAmount == 100)
         {
             SceneManager.LoadScene("Level1");
         }
+    }
+
+    private void OpenTransition() 
+    {
+        currentAmount = Mathf.Clamp(currentAmount - Time.deltaTime * 200, 0f, 100f);
+        TransitionImage.fillAmount = currentAmount / 100f;
+    }
+
+    private void CloseTransition()
+    {
+        currentAmount = Mathf.Clamp(currentAmount + Time.deltaTime * 200, 0f, 100f);
+        TransitionImage.fillAmount = currentAmount / 100f;
     }
 }

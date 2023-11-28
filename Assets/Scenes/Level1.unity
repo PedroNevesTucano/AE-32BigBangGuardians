@@ -946,9 +946,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1608231032}
-  followSpeed: 10
-  mouseOffset: 3
   sniper: {fileID: 1654623634}
+  distance: 0
 --- !u!4 &551388323 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3991676922636429714, guid: 8d2bb19adaeb95148a6fe93f33cb0165, type: 3}
@@ -3306,6 +3305,10 @@ PrefabInstance:
     - target: {fileID: 3314896194519661756, guid: 6ebe80dab947e8d41954c4665c960f0b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5245486531423521000, guid: 6ebe80dab947e8d41954c4665c960f0b, type: 3}
+      propertyPath: requiredHoldTime
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5989504067568881025, guid: 6ebe80dab947e8d41954c4665c960f0b, type: 3}
       propertyPath: spriteRenderer
