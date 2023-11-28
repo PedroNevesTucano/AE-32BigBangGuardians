@@ -13,7 +13,7 @@ public class Door : MonoBehaviour
     }
     public void OnEnemySpawned()
     {
-        print("Hello");
+       print("Hello");
        numberofenemies += 1;
     }
 

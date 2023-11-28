@@ -15,6 +15,8 @@ public class Boss : MonoBehaviour
     public int spawnRadius = 5;
     public float spawnInterval = 2f;
     public int bulletSpeed;
+    public int health = 30;
+    public bool istalking = false;
 
     private void Update()
     {
@@ -24,10 +26,29 @@ public class Boss : MonoBehaviour
         if (distanceToPlayer < 3 && Input.GetKeyDown(KeyCode.E))
         {
             dialogueSystem.StartDialogue();
+            istalking = true;
         }
         if(dialogueSystem.timer >= 3) 
         {
             dialogueOutcome();
+        }
+
+        if(health <= 0) 
+        {
+            Destroy(gameObject);
+        }
+
+    }
+
+    protected void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (istalking == true && collision.CompareTag("BulletTag"))
+        {
+            health -= 15;
+        }
+        if (istalking == true && collision.CompareTag("BigBulletTag"))
+        {
+            health -= 30;
         }
     }
 

@@ -99,4 +99,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: 1
   enemyPrefab: {fileID: 5098746812096644556, guid: cb982413ca496a44698f12fee274d44a, type: 3}
-  door: {fileID: 3585147450751062401, guid: 20558923d34cf5b4c9249c23ac6d6452, type: 3}
+  door: {fileID: 2535527877913488499, guid: 20558923d34cf5b4c9249c23ac6d6452, type: 3}
