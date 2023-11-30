@@ -195,9 +195,4 @@ public class Sniper : AbstractWeapon
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.velocity = direction * bigBulletSpeed * Time.fixedDeltaTime;
     }
-
-     protected override void Reload()
-    {
-        base.Reload();
-    }
 }

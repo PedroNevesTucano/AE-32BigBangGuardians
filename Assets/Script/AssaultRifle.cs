@@ -40,10 +40,4 @@ public class AssaultRifle : AbstractWeapon
             capacity -= 1;
         }
     }
-    
-    protected void Reload()
-    {
-        base.Reload();
-    }
-    
 }

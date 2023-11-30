@@ -53,9 +53,4 @@ public class Shotgun : AbstractWeapon
             capacity -= 1;
         }
     }
-    
-    protected void Reload()
-    {
-        base.Reload();
-    }
 }

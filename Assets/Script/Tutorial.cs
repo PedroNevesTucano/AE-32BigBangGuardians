@@ -1,109 +1,194 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class Tutorial : MonoBehaviour
 {
-    private Hashtable textHashtable = new Hashtable();
-    private int switchingCounter;
-
+    private Stack<string> textStack = new();
+    private float textSpeed = 0.009f;
     public TextMeshProUGUI myTextMesh;
-    private float textSpeed = 0.02f;
-    private float timerDuration = 1.5f;
-    private float timer;
-    
     public Weapon_Switcher WeaponSwitcher;
+    public Sniper Sniper;
+    public GameObject target;
+    private SpriteRenderer targetSpriteRenderer;
     
+    private bool rightMouseButtonIsClicked;
+    private bool leftMouseButtonIsClicked;
+    private bool isDashed;
+    private int numOfMessage;
+    private bool isTargetHit;
+    
+    private float timer;
+    private bool isTimerRunning;
     private void Start()
     {
-        InitializeTextHashtable();
-        WeaponSwitcher = FindObjectOfType<Weapon_Switcher>();
-
+        InitializeTextStack();
         StartCoroutine(NextText());
+        WeaponSwitcher = FindObjectOfType<Weapon_Switcher>();
+        Sniper = FindObjectOfType<Sniper>();
+        targetSpriteRenderer = target.GetComponent<SpriteRenderer>();
+        
     }
 
     void Update()
     {
-        HandleMovementInput(KeyCode.W, 1);
-        HandleMovementInput(KeyCode.S, 2);
-        HandleMovementInput(KeyCode.A, 3);
-        HandleMovementInput(KeyCode.D, 4);
-        UpdateTimer();
-        HandleWeaponSwitching();
+        if (Sniper.playerScript.IsDashing())
+        {
+            isDashed = true;
+        }
+        
+        
+        if (textStack.Count > 0)
+        {
+            HandleMovementInput(KeyCode.W, "Press \"W\" to move forward", "Press \"S\" to move backward");
+            HandleMovementInput(KeyCode.S, "Press \"S\" to move backward", "Press \"A\" to move left");
+            HandleMovementInput(KeyCode.A, "Press \"A\" to move left", "Press \"D\" to move right");
+            HandleMovementInput(KeyCode.D,"Press \"D\" to move right","Sometimes you need to accelerate to save your life. " +
+                                                                      "Press one of the movement and \"Space\" buttons at the same time to make a dash");
+            
+            if (!isDashed && numOfMessage == 4 && (Input.GetKey(KeyCode.W)||Input.GetKey(KeyCode.S)||Input.GetKey(KeyCode.A)||Input.GetKey(KeyCode.D)))
+            {
+                HandleMovementInput(KeyCode.Space,"Sometimes you need to accelerate to save your life. Press one of the movement and \"Space\" " +
+                                                  "buttons at the same time to make a dash","");
+            }
+
+            if (isTimerRunning)
+            {
+                timer += Time.deltaTime;
+            }
+
+            if (WeaponSwitcher.currentWeapon != 0 && numOfMessage == 5)
+            {
+                HandleWeaponSwitching("", "Switch to a sniper rifle and press the right mouse button to aim");
+            }
+                
+            if (WeaponSwitcher.currentWeapon == 0)
+            {
+                if (!rightMouseButtonIsClicked && numOfMessage == 5)
+                {
+                    HandleWeaponSwitching("", "You are holding a sniper rifle, press the right mouse button to aim");
+                }
+
+                if (Input.GetMouseButtonDown(1) && !rightMouseButtonIsClicked && numOfMessage == 6 )
+                {
+                    HandleWeaponSwitching("", "Now you're in the aiming mode, left click to shoot");
+                    rightMouseButtonIsClicked = true;
+                }
+                else if (Input.GetMouseButton(0) && !leftMouseButtonIsClicked && numOfMessage == 7)
+                {
+                    HandleWeaponSwitching("","Great, now without leaving the scope " +
+                        "and hold down the " +
+                        "left mouse button until the player turns bright blue and release the left button");
+                    leftMouseButtonIsClicked = true;
+                } 
+                else if (Sniper.isHolding && Sniper.bigBulletCooldown <=0 && Sniper.holdBefore <= 0 && Sniper.requiredHoldTime <=0 && numOfMessage == 8 )
+                {
+                    HandleWeaponSwitching("","Fire!");
+                }
+                else if (numOfMessage == 9 && Sniper.capacity < Sniper.maxCapacity && Input.GetMouseButtonUp(0))
+                {
+                    HandleWeaponSwitching("Fire!","Press \"T\" for reload");
+                }
+                if (numOfMessage == 10 && Sniper.capacity == Sniper.maxCapacity)
+                {
+                    HandleWeaponSwitching("Press \"T\" for reload","Scroll up to switch to shotgun");
+                }
+            }
+            
+            else if (WeaponSwitcher.currentWeapon == 1){
+                
+                if (numOfMessage == 11)
+                {
+                    HandleWeaponSwitching("","Now you don't need to hold down the right mouse button to aim,just press the left mouse button to shoot");
+                }
+                else if(numOfMessage == 12 && Input.GetMouseButton(0))
+                {
+                    if (!isTimerRunning)
+                    {
+                        timer = 0f;
+                        isTimerRunning = true;
+                    }
+                    HandleWeaponSwitching("","Remember that a shotgun is especially effective at close range and takes a long time to recharge");
+                }
+                else if (numOfMessage == 13 &&  timer >= 2.5f)
+                {
+                    HandleWeaponSwitching("", "Scroll up to switch to rifle");
+                    isTimerRunning = false;
+                }
+            }
+            
+            else
+            {
+                if (numOfMessage == 14)
+                {
+                    HandleWeaponSwitching("","You don't need to hold down the right mouse button to aim,just press the left mouse button to shoot");
+                }
+                else if(numOfMessage == 15 && Input.GetMouseButton(0))
+                {
+                    if (!isTimerRunning)
+                    {
+                        timer = 0f;
+                        isTimerRunning = true;
+                    }
+                    HandleWeaponSwitching("","The assault rifle is particularly effective at medium distances");
+                }
+                else if (numOfMessage == 16 && timer >= 2.5f)
+                {
+                    HandleWeaponSwitching("","Congratulations, the tutorial has been successfully completed");
+                    isTimerRunning = false;
+                    if (!isTimerRunning)
+                    {
+                        timer = 0f;
+                        isTimerRunning = true;
+                    }
+                }
+                else if (numOfMessage == 17 && timer >= 2.5f)
+                {
+                    HandleWeaponSwitching("","");
+                    isTimerRunning = false;
+                }
+            }
+            //Debug.Log( numOfMessage);
+            
+            if(timer >= 0.2f && isTargetHit)
+            {
+                targetSpriteRenderer.color = new Color(0.5f, 0.047f, 0.047f, 1f);
+                isTimerRunning = false;
+                isTargetHit = false;
+            }
+        }
     }
 
-    private void HandleMovementInput(KeyCode key, int counter)
+    private void HandleMovementInput(KeyCode key, string currentMessage, string nextMessage)
     {
-        bool movementKeyPressedAndHold = Input.GetKey(key);
-        bool spaceKeyPressed = Input.GetKeyDown(KeyCode.Space);
-
-        if ((movementKeyPressedAndHold && switchingCounter == counter) || (movementKeyPressedAndHold && spaceKeyPressed && switchingCounter == 5))
+        if (Input.GetKeyDown(key) && textStack.Peek() == currentMessage)
         {
-            switchingCounter++;
+            textStack.Pop(); // Remove the current message
+            textStack.Push(nextMessage); // Add the next message
+            numOfMessage++;
             StartCoroutine(NextText());
         }
     }
 
-    private void HandleWeaponSwitching()
-    { 
-        if (WeaponSwitcher.currentWeapon == 0)
-        {
-            if (Input.GetMouseButton(1) && switchingCounter == 6)
-            {
-                switchingCounter++;
-                StartCoroutine(NextText());
-            }
-            if (Input.GetMouseButton(1) && Input.GetMouseButton(0) && switchingCounter == 7)
-            {
-                StartTimer();
-                switchingCounter++;
-                StartCoroutine(NextText());
-            }
-        }
+    private void HandleWeaponSwitching(string currentMessage,string nextMessage)
+    {
+        textStack.Pop(); // Remove the current message
+        textStack.Push(nextMessage); // Add the next message
+        numOfMessage++;
+        StartCoroutine(NextText());
     }
 
-    private void StartTimer()
+    private void InitializeTextStack()
     {
-        timer = timerDuration;
-    }
-
-    private void UpdateTimer()
-    {
-        timer -= Time.deltaTime;
-        
-        if (timer <= 0f)
-        {
-            switchingCounter++;
-            StartCoroutine(NextText());
-            timer = timerDuration; 
-        }
-        
-        if (!Input.GetMouseButton(0))
-        {
-            timer = timerDuration;
-        }
-        Debug.Log(timer);
-    }
-
-    private void InitializeTextHashtable()
-    {
-        textHashtable.Add(0, "");
-        textHashtable.Add(1, "Press \"W\" to move forward");
-        textHashtable.Add(2, "Press \"S\" to move backward");
-        textHashtable.Add(3, "Press \"A\" to move left");
-        textHashtable.Add(4, "Press \"D\" to move right");
-        textHashtable.Add(5, "Sometimes you need to accelerate to save your life. Press one of the movement and \"Space\" buttons at the same time to make a dash");
-        textHashtable.Add(6, "You are holding a sniper rifle, press the right mouse button to aim");
-        textHashtable.Add(7, "Now you're in the aiming mode, left click to shoot");
-        textHashtable.Add(8, "Great, now without leaving the scope and hold down the left mouse button until the player turns bright blue and release the left button");
-        textHashtable.Add(9, "Fire!");
+        textStack.Push("Press \"W\" to move forward");
     }
 
     private IEnumerator NextText()
     {
-        if (textHashtable.ContainsKey(switchingCounter))
+        if (textStack.Count > 0)
         {
-            string nextText = (string)textHashtable[switchingCounter];
+            string nextText = textStack.Peek(); // Use Peek to get the top element without removing it
             yield return StartCoroutine(LetterByLetter(nextText));
         }
     }
@@ -116,4 +201,37 @@ public class Tutorial : MonoBehaviour
             yield return new WaitForSeconds(textSpeed);
         }
     }
+    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if ((collision.CompareTag("BulletTag") || collision.CompareTag("BigBulletTag") && timer <= 3f))
+        {
+            targetSpriteRenderer.color = new Color(0f, 1f, 0f, 1f);
+            isTargetHit = true;
+            
+            if (!isTimerRunning)
+            {
+                timer = 0f;
+                isTimerRunning = true;
+            }
+        }
+    }
+    /*
+    void OnCollisionEnter2D(Collider2D collision)
+    {
+        if ((collision.GetComponent<Collider>().CompareTag("BulletTag") || collision.GetComponent<Collider>().CompareTag("BigBulletTag") && timer <= 3f))
+        {
+            targetSpriteRenderer.color = new Color(0f, 1f, 0f, 1f);
+            isTargetHit = true;
+            
+            if (!isTimerRunning)
+            {
+                timer = 0f;
+                isTimerRunning = true;
+            }
+        }
+        */
 }
+
+
+
