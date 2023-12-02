@@ -22,24 +22,13 @@ public class DialogueSystem: MonoBehaviour
 
     void InitializeDialogueTree()
     {
-        DialogueNode node1 = new DialogueNode("Hello! How are you?");
-        DialogueNode node2 = new DialogueNode("I'm good, thanks. How about you?");
-        DialogueNode node3 = new DialogueNode("I'm not doing well. What about you?");
-        DialogueNode node4 = new DialogueNode("Great!", "Good");
-        DialogueNode node5 = new DialogueNode("That's not good. Anything I can do?");
-        DialogueNode node6 = new DialogueNode("I'm sorry to hear that. Let me know if you need anything.", "Bad");
+        DialogueNode node1 = new DialogueNode("Yo I want to stop the bigbang");
+        DialogueNode node2 = new DialogueNode("Really that easy, that's no fun", "Good");
+        DialogueNode node3 = new DialogueNode("We will battle then", "Bad");
 
-        node1.LeftOption = new DialogueOption("Good", node2);
-        node1.RightOption = new DialogueOption("Not good", node3);
+        node1.LeftOption = new DialogueOption("OK", node2);
+        node1.RightOption = new DialogueOption("NO", node3);
 
-        node2.LeftOption = new DialogueOption("Great", node4);
-        node2.RightOption = new DialogueOption("Not so great", node3);
-
-        node3.LeftOption = new DialogueOption("Just exploring", node4);
-        node3.RightOption = new DialogueOption("Looking for something", node5);
-
-        node5.LeftOption = new DialogueOption("Yes, please.", node6);
-        node5.RightOption = new DialogueOption("No, I'll be fine.", node6);
 
         currentNode = node1;
     }

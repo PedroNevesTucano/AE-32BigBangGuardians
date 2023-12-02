@@ -143,8 +143,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91ea7af24d82e51468dae0264790eec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnAreaPrefab: {fileID: 1366153909600648655, guid: d9cd99ba22e4e4f4cb6b0f21d1db6f09, type: 3}
   Door: {fileID: 2535527877913488499, guid: 20558923d34cf5b4c9249c23ac6d6452, type: 3}
-  spawnPosition: {x: 0, y: 0, z: 0}
-  spawnPosition2: {x: 0, y: 0, z: 0}
-  spawnPosition3: {x: 0, y: 0, z: 0}
+  triggered: 0
+  doorspawnposition: {x: 0, y: 0}
+  enemiesToSpawn:
+  - enemyPrefab: {fileID: 1366153909600648655, guid: d9cd99ba22e4e4f4cb6b0f21d1db6f09, type: 3}
+    spawnPoints:
+    - {x: 0, y: 0}
+    isSpawned: 0

@@ -17,6 +17,6 @@ public class OEnemybulletrotation : MonoBehaviour
         rotz += 1000 * Time.deltaTime;
         transform.rotation = Quaternion.Euler(0, 0, rotz);
 
-        //Destroy(gameObject, 3f);
+        Destroy(gameObject, 5f);
     }
 }

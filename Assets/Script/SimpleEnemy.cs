@@ -1,10 +1,18 @@
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using Pathfinding;
+
 public class SimpleEnemy : AbstractEnemy
 {
     //two fields with a private modifier to ensure that they can only be used within this class
-    private float movementSpeed = 250;
+    private float movementSpeed = 450;
     private bool chasing;
+    public float nextwaipointdistance = 3f;
+    private Path path;
+    private int currentWaipoint = 0;
+    bool reachedendofpath = false;
+    Seeker seeker;
+    
     /*
         Awake,Start,Update,FixedUpdate,OnTriggerEnter2D methods are inherited from MonoBehaviour 
         which is inherited through the parent AbstractEnemy class 
@@ -20,11 +28,34 @@ public class SimpleEnemy : AbstractEnemy
     {
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player");
+        seeker = GetComponent<Seeker>();
         door = GameObject.FindGameObjectWithTag("door");
+        InvokeRepeating("UpdatePath", 0f, 0.5f);
+    }
+
+    private void OnpathComplete(Path P)
+    {
+        if (!P.error)
+        {
+            path = P;
+            currentWaipoint = 0;
+        }
     }
 
     private void Update()
     {
+        if (path == null)
+        {
+            // do nothing
+        }
+        if(currentWaipoint >= path.vectorPath.Count)
+        {
+            reachedendofpath = true;
+        }
+        else
+        {
+            reachedendofpath = false;
+        }
         if (health <= 0)
         {
             if (door != null) 
@@ -40,7 +71,18 @@ public class SimpleEnemy : AbstractEnemy
         Vector3 directionToPlayer = player.transform.position - transform.position;
         float distanceToPlayer = directionToPlayer.magnitude;
         Vector3 movementDirection = directionToPlayer.normalized;
-        
+
+        Vector2 direction = ((Vector2)path.vectorPath[currentWaipoint] - rb.position).normalized;
+        Vector2 force = direction * movementSpeed * Time.deltaTime;
+        float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaipoint]);
+
+        if (distance < nextwaipointdistance)
+        {
+            currentWaipoint++;
+        }
+
+        rb.AddForce(force);
+
         if (bulletCooldown > 0 && chasing)
         {
             bulletCooldown -= Time.fixedDeltaTime;
@@ -64,22 +106,29 @@ public class SimpleEnemy : AbstractEnemy
             if (distanceToPlayer >= 3)
             {
                 Shoot();
-                rb.velocity = movementSpeed * Time.fixedDeltaTime * movementDirection;
             }
             else if (distanceToPlayer < 2f)
             {
                 Shoot();
-                rb.velocity = movementSpeed * Time.fixedDeltaTime * -movementDirection;
+
             }
             else
             {
                 Shoot();
-                rb.velocity = Vector3.zero;
+                
             }
         }
         else
         {
-            rb.velocity = Vector3.zero;
+            
+        }
+    }
+
+    private void UpdatePath()
+    {
+        if (seeker.IsDone())
+        {
+            seeker.StartPath(rb.position, player.transform.position, OnpathComplete);
         }
     }
 

@@ -7,9 +7,11 @@ public class OEnemybehaviour : AbstractEnemy
 {
     public bool chasing;
     public float movementSpeed;
-    public Transform[] teleportPositions;
+    public Vector2[] teleportPositions;
     private int currentPositionIndex = 0;
     private float timer = 2;
+    public GameObject trigger;
+    public bool wastrigged;
 
 
 
@@ -31,7 +33,7 @@ public class OEnemybehaviour : AbstractEnemy
     {
         Vector3 directionToPlayer = player.transform.position - transform.position;
         float distanceToPlayer = directionToPlayer.magnitude;
-        Debug.Log(distanceToPlayer);
+        Debug.Log(transform.position);
 
 
         if (bulletCooldown > 0)
@@ -42,6 +44,13 @@ public class OEnemybehaviour : AbstractEnemy
         if (distanceToPlayer <= 10)
         {
             Shoot();
+        }
+
+        if(trigger.GetComponent<SpawnTrigger>().triggered == true && wastrigged == false)
+        {
+            door = GameObject.FindGameObjectWithTag("door");
+            door.GetComponent<Door>().OnEnemySpawned();
+            wastrigged = true;
         }
 
         
@@ -59,6 +68,15 @@ public class OEnemybehaviour : AbstractEnemy
         {
             currentPositionIndex = 0;
         }
+
+        if (health <= 0)
+        {
+            if (door != null)
+            {
+                door.GetComponent<Door>().OnEnemyDestroyed();
+            }
+            Destroy(gameObject);
+        }
     }
 
     void TeleportToNextPosition()
@@ -69,7 +87,7 @@ public class OEnemybehaviour : AbstractEnemy
             return;
         }
 
-        transform.position = teleportPositions[currentPositionIndex].position;
+        transform.position = teleportPositions[currentPositionIndex];
         currentPositionIndex = currentPositionIndex + 1;
 
     }

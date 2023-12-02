@@ -5,13 +5,9 @@ using UnityEngine;
 
 public class Shotgun : AbstractWeapon
 {
-    private void FixedUpdate()
-    {
-        Shoot();
-    }
-
     private void Update()
     {
+        Shoot();
 
         if (isshooting)
         {

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 
@@ -17,6 +18,8 @@ public class Boss : MonoBehaviour
     public int bulletSpeed;
     public int health = 30;
     public bool istalking = false;
+    public GameObject healthbar;
+    public GameObject outline;
 
     private void Update()
     {
@@ -27,17 +30,30 @@ public class Boss : MonoBehaviour
         {
             dialogueSystem.StartDialogue();
             istalking = true;
+            GameObject childObject = transform.Find("Boss Trigger").gameObject;
+            childObject.SetActive(false);
         }
         if(dialogueSystem.timer >= 3) 
         {
             dialogueOutcome();
         }
 
-        if(health <= 0) 
+        if(health <= 0)
         {
             Destroy(gameObject);
+            healthbar.SetActive(false);
+            outline.SetActive(false);
         }
 
+    }
+
+    void Start()
+    {
+    }
+
+    private void Awake()
+    {
+        timer = 10;
     }
 
     protected void OnTriggerEnter2D(Collider2D collision)
@@ -52,11 +68,6 @@ public class Boss : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        
-    }
-
     private void dialogueOutcome()
     {
         switch (dialogueSystem.currentNode.Finaloutcome)
@@ -65,6 +76,8 @@ public class Boss : MonoBehaviour
                 //make so that it has a happy ending
                 break;
             case "Bad":
+                healthbar.SetActive(true);
+                outline.SetActive(true);
                 Battle();
                 break;
         }

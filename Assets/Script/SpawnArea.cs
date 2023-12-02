@@ -16,7 +16,8 @@ public class SpawnArea : MonoBehaviour
     }
     private void Start()
     {     
-       door = GameObject.FindGameObjectWithTag("door");        
+       door = GameObject.FindGameObjectWithTag("door");
+       timer = Random.Range(0.5f, 2f);
     }
 
     // Update is called once per frame

@@ -87,5 +87,4 @@ public class AllDScript : AbstractEnemy
         rb = bullet.GetComponent<Rigidbody2D>();
         rb.velocity = direction.normalized * bulletSpeed * Time.fixedDeltaTime;
     }
-    private new void OnTriggerEnter2D(Collider2D collision) => base.OnTriggerEnter2D(collision);
 }
