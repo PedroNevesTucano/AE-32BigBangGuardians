@@ -87,9 +87,9 @@ public class Enemyarch : AbstractEnemy
             currentWaipoint++;
         }
 
-        rb.AddForce(force);
+        rb.velocity = force;
 
-        
+
         if (distanceToPlayer <= viewRange)
         {
             chasing = true;

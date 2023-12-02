@@ -5,7 +5,7 @@ using Pathfinding;
 public class SimpleEnemy : AbstractEnemy
 {
     //two fields with a private modifier to ensure that they can only be used within this class
-    private float movementSpeed = 450;
+    private float movementSpeed = 300;
     private bool chasing;
     public float nextwaipointdistance = 3f;
     private Path path;
@@ -22,7 +22,7 @@ public class SimpleEnemy : AbstractEnemy
     private void Awake()
     {
         bulletCooldownBase = bulletCooldown;
-        bulletCooldown = 1.5f;
+        bulletCooldown = 2f;
     }
     private void Start()
     {
@@ -56,6 +56,7 @@ public class SimpleEnemy : AbstractEnemy
         {
             reachedendofpath = false;
         }
+
         if (health <= 0)
         {
             if (door != null) 
@@ -64,6 +65,7 @@ public class SimpleEnemy : AbstractEnemy
             }
             Destroy(gameObject);
         }
+        bulletCooldown -= Time.deltaTime;
     }
 
     private void FixedUpdate()
@@ -73,7 +75,7 @@ public class SimpleEnemy : AbstractEnemy
         Vector3 movementDirection = directionToPlayer.normalized;
 
         Vector2 direction = ((Vector2)path.vectorPath[currentWaipoint] - rb.position).normalized;
-        Vector2 force = direction * movementSpeed * Time.deltaTime;
+        Vector2 force = direction * movementSpeed * Time.fixedDeltaTime;
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaipoint]);
 
         if (distance < nextwaipointdistance)
@@ -81,16 +83,7 @@ public class SimpleEnemy : AbstractEnemy
             currentWaipoint++;
         }
 
-        rb.AddForce(force);
-
-        if (bulletCooldown > 0 && chasing)
-        {
-            bulletCooldown -= Time.fixedDeltaTime;
-        }
-        else if (distanceToPlayer <= viewRange)
-        {
-            chasing = true;
-        }
+        rb.velocity = force;
 
         if (bulletCooldown < 0.2f)
         {
@@ -100,28 +93,7 @@ public class SimpleEnemy : AbstractEnemy
         {
             GetComponent<SpriteRenderer>().color = new Color(0.5f, 0f, 0f, 1f);
         }
-
-        if (chasing || health <= 29)
-        {
-            if (distanceToPlayer >= 3)
-            {
-                Shoot();
-            }
-            else if (distanceToPlayer < 2f)
-            {
-                Shoot();
-
-            }
-            else
-            {
-                Shoot();
-                
-            }
-        }
-        else
-        {
-            
-        }
+        Shoot();
     }
 
     private void UpdatePath()
