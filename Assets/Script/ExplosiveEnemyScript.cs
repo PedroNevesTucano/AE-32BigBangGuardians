@@ -3,12 +3,16 @@ public class ExplosiveEnemyScript : AbstractEnemy
 {
     //two fields with a private modifier to ensure that they can only be used within this class
     public GameObject explosionArea;
+    public Explosion explosion;
     public GameObject explosionIndicator;
+    public Player player1;
 
     private float movementSpeed = 400;
     private bool chasing;
     private bool explode;
     private float timeBeforeExplosion = 1.3f;
+    private float distanceToPlayerExplosion;
+    private bool dealtDamage;
 
     private float IncreaseSize;
     /*
@@ -25,7 +29,6 @@ public class ExplosiveEnemyScript : AbstractEnemy
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void Update()
@@ -34,6 +37,36 @@ public class ExplosiveEnemyScript : AbstractEnemy
         {
             Destroy(gameObject);
         }
+        if (distanceToPlayerExplosion > 3)
+        {
+            distanceToPlayerExplosion = 3;
+        }
+
+        if (timeBeforeExplosion <= 0)
+        {
+            explosionArea.GetComponent<SpriteRenderer>().color = new Color(0.7f, 0.1f, 0, 1f);
+        }
+
+        if (timeBeforeExplosion <= -0.5f)
+        {
+            Destroy(gameObject);
+        }
+
+        if (explosion.inRange && timeBeforeExplosion <= 0 && dealtDamage == false)
+        {
+            float damageMultiplier = 1.0f - (distanceToPlayerExplosion / 3.0f);
+            damageMultiplier = Mathf.Max(damageMultiplier, 0.2f);
+
+            damageMultiplier = Mathf.Clamp01(damageMultiplier);
+
+            int damage = Mathf.RoundToInt(100 * damageMultiplier);
+            player1.playerHealth -= damage;
+            dealtDamage = true;
+            float repulsionFactor = 3.0f;
+            float repulsion = repulsionFactor / distanceToPlayerExplosion;
+            Vector2 direction = (player.transform.position - transform.position).normalized;
+            player.GetComponent<Rigidbody2D>().AddForce((direction * repulsion) * 4000f, ForceMode2D.Force);
+        }
     }
 
     private void FixedUpdate()
@@ -41,6 +74,8 @@ public class ExplosiveEnemyScript : AbstractEnemy
         Vector3 directionToPlayer = player.transform.position - transform.position;
         float distanceToPlayer = directionToPlayer.magnitude;
         Vector3 movementDirection = directionToPlayer.normalized;
+
+        distanceToPlayerExplosion = directionToPlayer.magnitude;
 
         if (bulletCooldown > 0 && chasing)
         {
@@ -61,14 +96,9 @@ public class ExplosiveEnemyScript : AbstractEnemy
             GetComponent<SpriteRenderer>().color = new Color(0.0824f, 0.7843f, 0.2549f, 1f);
         }
 
-        if (timeBeforeExplosion < 0.3f)
+        if (timeBeforeExplosion < 0.3f && timeBeforeExplosion > 0f)
         {
-            explosionArea.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.1f, 0,1f);
-        }
-
-        if (timeBeforeExplosion <= 0)
-        {
-            Destroy(gameObject);
+            explosionArea.GetComponent<SpriteRenderer>().color = new Color(0.8f, 0.4f, 0f, 1f);
         }
 
         if (chasing || health <= 49)
@@ -87,7 +117,7 @@ public class ExplosiveEnemyScript : AbstractEnemy
             rb.velocity = Vector3.zero;
         }
 
-        if (explode == true) 
+        if (explode == true)
         {
             rb.constraints = RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
             Shoot();
@@ -100,14 +130,19 @@ public class ExplosiveEnemyScript : AbstractEnemy
     {
         IncreaseSize += Time.fixedDeltaTime;
 
-        if (explosionArea.transform.localScale.x <= 6)
+        float maxScale = 6f;
+
+        float newExplosionAreaScale = Mathf.Min(IncreaseSize * 9f, maxScale);
+        explosionArea.transform.localScale = new Vector3(newExplosionAreaScale, newExplosionAreaScale, 1f);
+
+        float newExplosionIndicatorScale = Mathf.Min(IncreaseSize * 20f, maxScale + 0.2f);
+        explosionIndicator.transform.localScale = new Vector3(newExplosionIndicatorScale, newExplosionIndicatorScale, 1f);
+
+        CircleCollider2D collider = explosionArea.GetComponentInChildren<CircleCollider2D>();
+
+        if (collider != null)
         {
-            explosionArea.transform.localScale = new Vector3(IncreaseSize * 9f, IncreaseSize * 9f, 1f);
-        }
-        
-        if (explosionIndicator.transform.localScale.x <= 6)
-        {
-            explosionIndicator.transform.localScale = new Vector3(IncreaseSize * 14f, IncreaseSize * 14f, 1f);
+            collider.radius = newExplosionAreaScale / 12;
         }
     }
     /*
