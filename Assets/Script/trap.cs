@@ -3,9 +3,9 @@ public class trap : AbstractEnemy
 {
     public GameObject bigEnemyBulletPrefab;
     private float bigBulletSpeed = 2000;
-    private float bigBulletCooldown = 0.7f;
+    public float bigBulletCooldown = 0.7f;
     //this private field is set to 0 by default
-    private float bigBulletCooldownBase;
+    public float bigBulletCooldownBase;
 
     private void Awake()
     {
@@ -57,7 +57,7 @@ public class trap : AbstractEnemy
     
     private void TargetedShoot()
     {
-        if (CooldownChecker())
+        if (bigBulletCooldown <= 0)
         {
             Vector3 direction = (player.transform.position - transform.position).normalized;
 
@@ -68,7 +68,7 @@ public class trap : AbstractEnemy
 
             rb = bullet.GetComponent<Rigidbody2D>();
             rb.velocity = direction * bigBulletSpeed * Time.fixedDeltaTime;
+            bigBulletCooldown = bigBulletCooldownBase;
         }
     }
-    private new void OnTriggerEnter2D(Collider2D collision) => base.OnTriggerEnter2D(collision);
 }

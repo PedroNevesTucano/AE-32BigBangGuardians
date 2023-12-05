@@ -19,7 +19,7 @@ public class AssaultRifle : AbstractWeapon
             isshooting = false;
         }
         
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             Reload();
         }
@@ -40,10 +40,4 @@ public class AssaultRifle : AbstractWeapon
             capacity -= 1;
         }
     }
-    
-    protected void Reload()
-    {
-        base.Reload();
-    }
-    
 }

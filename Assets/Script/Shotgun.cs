@@ -21,7 +21,7 @@ public class Shotgun : AbstractWeapon
         }
         
         
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             Reload();
         }
@@ -52,10 +52,5 @@ public class Shotgun : AbstractWeapon
             isshooting = true;
             capacity -= 1;
         }
-    }
-    
-    protected void Reload()
-    {
-        base.Reload();
     }
 }

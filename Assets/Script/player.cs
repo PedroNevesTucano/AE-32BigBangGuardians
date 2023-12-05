@@ -59,6 +59,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (playerHealth > 100)
+        {
+            playerHealth = 100;
+        }
+
         if (playerHealth <= 0)
         {
             dead = true;
@@ -69,7 +74,7 @@ public class Player : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.R)){
+        if (Input.GetKeyDown(KeyCode.M)){
             SceneManager.LoadScene("Level1");
         }
 

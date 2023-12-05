@@ -7,7 +7,8 @@ public class GunCooldownUIUpdate : MonoBehaviour
     {
         Sniper,
         Charged,
-        Shotgun
+        Shotgun,
+        Rifle
     }
 
     public Weapon_Switcher WeaponSwitcher;
@@ -16,6 +17,8 @@ public class GunCooldownUIUpdate : MonoBehaviour
     public Sniper sniper;
     public Image ShotgunUIIndicator;
     public Shotgun shotgun;
+    public Image RilfeUIIndicator;
+    public AssaultRifle rifle;
 
     public UIType uiType;  // Add a variable to specify the UI type
 
@@ -87,6 +90,27 @@ public class GunCooldownUIUpdate : MonoBehaviour
             else
             {
                 ShotgunUIIndicator.enabled = false;
+            }
+        }
+        else if (uiType == UIType.Rifle)
+        {
+
+            if (rifle.counter <= 0)
+            {
+                RilfeUIIndicator.color = Color.blue;
+            }
+            else
+            {
+                RilfeUIIndicator.color = Color.black;
+            }
+
+            if (WeaponSwitcher.currentWeapon == 2)
+            {
+                RilfeUIIndicator.enabled = true;
+            }
+            else
+            {
+                RilfeUIIndicator.enabled = false;
             }
         }
     }

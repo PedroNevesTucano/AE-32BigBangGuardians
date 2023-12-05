@@ -19,6 +19,7 @@ TagManager:
   - terminal
   - riflebullet
   - shotgunbullet
+  - Explosion
   layers:
   - Default
   - TransparentFX
