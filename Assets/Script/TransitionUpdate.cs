@@ -6,6 +6,7 @@ public class TransitionUpdate : MonoBehaviour
 {
     public Image TransitionImage;
     public HubTriggerScript hubTrigger;
+    public TutorialTransition tutorial;
     public Lv1 lv1Trigger;
     public Player player;
     public float currentAmount = 100f;
@@ -39,6 +40,16 @@ public class TransitionUpdate : MonoBehaviour
         }
 
         if (lv1Trigger != null && lv1Trigger.switchToTransitionLv1 == true)
+        {
+            CloseTransition();
+        }
+
+        if (tutorial != null && tutorial.switchToTutorialTransition == true  && currentAmount == 100)
+        {
+            SceneManager.LoadScene("Tutorial");
+        }
+        
+        if (tutorial != null && tutorial.switchToTutorialTransition == true)
         {
             CloseTransition();
         }

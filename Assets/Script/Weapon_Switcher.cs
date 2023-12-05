@@ -19,15 +19,12 @@ public class Weapon_Switcher : MonoBehaviour
 
     void Update()
     {
-        // Получаем ввод от колесика мыши
         float scrollWheelInput = Input.GetAxis("Mouse ScrollWheel");
-
-        // Если колесико мыши вращается вверх, увеличиваем индекс оружия
+        
         if (scrollWheelInput > 0f)
         {
             SwitchWeapon(1);
         }
-        // Если колесико мыши вращается вниз, уменьшаем индекс оружия
         else if (scrollWheelInput < 0f)
         {
             SwitchWeapon(-1);
@@ -36,16 +33,13 @@ public class Weapon_Switcher : MonoBehaviour
 
     void SwitchWeapon(int direction)
     {
-        // Скрываем все оружия
         foreach (Transform weapon in transform)
         {
             weapon.gameObject.SetActive(false);
         }
-
-        // Изменяем индекс текущего оружия
+        
         currentWeapon += direction;
-
-        // Обработка циклического переключения оружия
+        
         if (currentWeapon < 0)
         {
             currentWeapon = transform.childCount - 1;
@@ -54,8 +48,7 @@ public class Weapon_Switcher : MonoBehaviour
         {
             currentWeapon = 0;
         }
-
-
+        
         transform.GetChild(currentWeapon).gameObject.SetActive(true);
     }
 }
