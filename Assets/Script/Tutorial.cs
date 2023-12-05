@@ -207,6 +207,12 @@ public class Tutorial : MonoBehaviour
 
     private IEnumerator LetterByLetter(string printedText)
     {
+        if (myTextMesh == null)
+        {
+            Debug.LogError("myTextMesh is not assigned!");
+            yield break;
+        }
+
         for (int i = 0; i <= printedText.Length; i++)
         {
             myTextMesh.text = printedText.Substring(0, i);
