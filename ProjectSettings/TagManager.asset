@@ -16,6 +16,9 @@ TagManager:
   - sniper
   - Undefined
   - door
+  - terminal
+  - riflebullet
+  - shotgunbullet
   layers:
   - Default
   - TransparentFX

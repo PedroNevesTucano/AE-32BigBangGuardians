@@ -58,13 +58,21 @@ public class Boss : MonoBehaviour
 
     protected void OnTriggerEnter2D(Collider2D collision)
     {
-        if (istalking == true && collision.CompareTag("BulletTag"))
+        if (collision.CompareTag("BulletTag"))
         {
             health -= 15;
         }
-        if (istalking == true && collision.CompareTag("BigBulletTag"))
+        else if (collision.CompareTag("BigBulletTag"))
         {
             health -= 30;
+        }
+        else if (collision.CompareTag("riflebullet"))
+        {
+            health -= 20;
+        }
+        else if (collision.CompareTag("shotgunbullet"))
+        {
+            health -= 10;
         }
     }
 

@@ -186,8 +186,10 @@ MonoBehaviour:
   iFrames: 0.3
   iFramesBase: 0
   canDash: 0
+  dead: 0
   isPaused: 0
   spriteRenderer: {fileID: 0}
+  weaponSwitcher: {fileID: 0}
   tr: {fileID: 6384341032823467392}
 --- !u!114 &5963083195138316972
 MonoBehaviour:
@@ -387,6 +389,10 @@ PrefabInstance:
       propertyPath: bulletSpeed
       value: 2000
       objectReference: {fileID: 0}
+    - target: {fileID: 5527822276258972494, guid: d541d3e03c8962e4a83906c2b1107b4e, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 864172864628863109, guid: c7f9b9462c12e8443b5d365566fc9b5b, type: 3}
     - target: {fileID: 5549352092580854781, guid: d541d3e03c8962e4a83906c2b1107b4e, type: 3}
       propertyPath: bulletSpeed
       value: 2000
@@ -399,7 +405,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Weapon Switcher
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6189636962470377153, guid: d541d3e03c8962e4a83906c2b1107b4e, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 864172864628863109, guid: 3def10b82ee581c4abdaf6a80a2e7e49, type: 3}
+    m_RemovedComponents:
+    - {fileID: 3591954036026257847, guid: d541d3e03c8962e4a83906c2b1107b4e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

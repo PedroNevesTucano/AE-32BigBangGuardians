@@ -38,5 +38,13 @@ public abstract class AbstractEnemy : MonoBehaviour
         {
             health -= 30;
         }
+        else if (collision.CompareTag("riflebullet"))
+        {
+            health -= 20;
+        }
+        else if (collision.CompareTag("shotgunbullet"))
+        {
+            health -= 10;
+        }
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     public int numberofenemies;
+    public GameObject terminal;
 
     private void Awake()
     {
@@ -26,6 +27,7 @@ public class Door : MonoBehaviour
         {
             // All enemies are destroyed, perform door destruction or any other action
             Destroy(gameObject);
+            Instantiate(terminal, transform.position, transform.rotation);
         }
     }
 }

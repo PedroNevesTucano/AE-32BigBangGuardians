@@ -1,14 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
-using UnityEditor.EventSystems;
-using Unity.VisualScripting;
+using UnityEngine;
 
-public class bossindicator : MonoBehaviour
+public class NPCscript : MonoBehaviour
 {
     public TextMeshProUGUI myTextMesh;
-    public string fullText = "Yo my guy press (E) to talk ";
+    public string fullText = "";
     private float textSpeed = 0.02f;
     public bool test;
 
