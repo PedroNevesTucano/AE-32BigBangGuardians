@@ -152,7 +152,7 @@ public class Sniper : AbstractWeapon
         }
         
         
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             Reload();
         }

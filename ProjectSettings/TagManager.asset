@@ -19,6 +19,8 @@ TagManager:
   - terminal
   - riflebullet
   - shotgunbullet
+  - Target
+  - TutorialTrigger
   layers:
   - Default
   - TransparentFX

@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Tutorial : MonoBehaviour
 {
@@ -72,7 +74,7 @@ public class Tutorial : MonoBehaviour
 
                 if (Input.GetMouseButtonDown(1) && !rightMouseButtonIsClicked && numOfMessage == 6 )
                 {
-                    HandleWeaponSwitching("", "Now you're in the aiming mode, left click to shoot");
+                    HandleWeaponSwitching("", "Now you are in aiming mode, point at the red target and left click to shoot");
                     rightMouseButtonIsClicked = true;
                 }
                 else if (Input.GetMouseButton(0) && !leftMouseButtonIsClicked && numOfMessage == 7)
@@ -88,11 +90,11 @@ public class Tutorial : MonoBehaviour
                 }
                 else if (numOfMessage == 9 && Sniper.capacity < Sniper.maxCapacity && Input.GetMouseButtonUp(0))
                 {
-                    HandleWeaponSwitching("Fire!","Press \"T\" for reload");
+                    HandleWeaponSwitching("Fire!","Press \"R\" for reload");
                 }
                 if (numOfMessage == 10 && Sniper.capacity == Sniper.maxCapacity)
                 {
-                    HandleWeaponSwitching("Press \"T\" for reload","Scroll up to switch to shotgun");
+                    HandleWeaponSwitching("Press \"R\" for reload","Scroll up to switch to shotgun");
                 }
             }
             
@@ -147,9 +149,19 @@ public class Tutorial : MonoBehaviour
                 {
                     HandleWeaponSwitching("","");
                     isTimerRunning = false;
+                    SceneManager.LoadScene("HUB");
                 }
             }
             //Debug.Log( numOfMessage);
+
+
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                SceneManager.LoadScene("HUB");
+            }
+            
+            
+            
             
             if(timer >= 0.2f && isTargetHit)
             {
@@ -216,21 +228,6 @@ public class Tutorial : MonoBehaviour
             }
         }
     }
-    /*
-    void OnCollisionEnter2D(Collider2D collision)
-    {
-        if ((collision.GetComponent<Collider>().CompareTag("BulletTag") || collision.GetComponent<Collider>().CompareTag("BigBulletTag") && timer <= 3f))
-        {
-            targetSpriteRenderer.color = new Color(0f, 1f, 0f, 1f);
-            isTargetHit = true;
-            
-            if (!isTimerRunning)
-            {
-                timer = 0f;
-                isTimerRunning = true;
-            }
-        }
-        */
 }
 
 

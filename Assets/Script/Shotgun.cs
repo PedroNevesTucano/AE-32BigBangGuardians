@@ -21,7 +21,7 @@ public class Shotgun : AbstractWeapon
         }
         
         
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             Reload();
         }

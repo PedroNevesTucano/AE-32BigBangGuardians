@@ -69,7 +69,7 @@ public class Player : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.R)){
+        if (Input.GetKeyDown(KeyCode.M)){
             SceneManager.LoadScene("Level1");
         }
 
