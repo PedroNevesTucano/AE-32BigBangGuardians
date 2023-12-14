@@ -5,34 +5,27 @@ using UnityEngine.SceneManagement;
 
 public class FadeInAndOut : MonoBehaviour
 {
-    // Start is called before the first frame update
-    private float fadeInOutDuration = 2f;
-    private float currentAlpha = 1f;
-    private float wait = 3f;
-    private UnityEngine.UI.Image image;
+    public float fadeInOutDuration = 2f;
+    public float currentAlpha = 1f;
+    public UnityEngine.UI.Image image;
+
     void Start()
     {
         image = GetComponent<UnityEngine.UI.Image>();
-
         SetImageAlpha(1f);
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    public void UpdateAlpha(float deltaTime,int plusOrMinus1)
     {
-        currentAlpha -= Time.fixedDeltaTime / fadeInOutDuration;
-
+        currentAlpha -= plusOrMinus1 * (deltaTime / fadeInOutDuration);
         currentAlpha = Mathf.Clamp01(currentAlpha);
-
         SetImageAlpha(currentAlpha);
     }
 
-    void SetImageAlpha(float alpha)
+    public void SetImageAlpha(float alpha)
     {
         Color currentColor = image.color;
-
         currentColor.a = alpha;
-
         image.color = currentColor;
     }
 }

@@ -22,6 +22,8 @@ TagManager:
   - Explosion
   - Target
   - TutorialTrigger
+  - PlayButton
+  - QuitButton
   layers:
   - Default
   - TransparentFX
