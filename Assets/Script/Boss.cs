@@ -16,7 +16,7 @@ public class Boss : MonoBehaviour
     public int spawnRadius = 5;
     public float spawnInterval = 2f;
     public int bulletSpeed;
-    public int health = 30;
+    public int health = 200;
     public bool istalking = false;
     public GameObject healthbar;
     public GameObject outline;

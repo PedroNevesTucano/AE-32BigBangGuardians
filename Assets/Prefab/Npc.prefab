@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1377955695329790146}
   - component: {fileID: 7601958187440561284}
   - component: {fileID: 8861694042965812572}
+  - component: {fileID: 1099570147857172171}
   m_Layer: 7
   m_Name: Npc
   m_TagString: Enemy
@@ -27,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 94743792962636303}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.8775513, y: -3.9259615, z: -0.15704964}
+  m_LocalPosition: {x: -12, y: -11.33, z: -0.15704964}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -132,6 +133,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1099570147857172171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 94743792962636303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 008889b15389812469456391b82afcf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueText: {fileID: 0}
+  optionButtonLeft: {fileID: 0}
+  optionButtonRight: {fileID: 0}
+  dialogueended: 0
+  timer: 0
+  player: {fileID: 0}
+  triggertext: {fileID: 6336951116845880985}
 --- !u!1 &1358809936491522717
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,8 +398,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4145858288162818189}
   - component: {fileID: 5979407183649336181}
+  - component: {fileID: 5244653591209839152}
   m_Layer: 0
-  m_Name: Boss Trigger
+  m_Name: NPC Trigger
   m_TagString: Lv1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -445,3 +466,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &5244653591209839152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8530943132902010272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed5b922d4c41385488a8e7f4df622cd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myTextMesh: {fileID: 6336951116845880985}
+  fullText: Yooooooo!!!!!
+  test: 0

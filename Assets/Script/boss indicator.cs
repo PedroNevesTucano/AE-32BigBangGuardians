@@ -1,9 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEditor.EventSystems;
-using Unity.VisualScripting;
 
 public class bossindicator : MonoBehaviour
 {

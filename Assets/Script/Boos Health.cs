@@ -22,6 +22,6 @@ public class BoosHealth : MonoBehaviour
 
     float CalculateFillAmount(float currentHealth)
     {
-        return currentHealth / 30;
+        return currentHealth / 200;
     }
 }
