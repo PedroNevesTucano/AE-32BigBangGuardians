@@ -11,6 +11,7 @@ public class SimpleEnemy : AbstractEnemy
     private int currentWaipoint = 0;
     bool reachedendofpath = false;
     Seeker seeker;
+    private Animator animator;
     
     /*
         Awake,Start,Update,FixedUpdate,OnTriggerEnter2D methods are inherited from MonoBehaviour 
@@ -30,6 +31,7 @@ public class SimpleEnemy : AbstractEnemy
         seeker = GetComponent<Seeker>();
         door = GameObject.FindGameObjectWithTag("door");
         InvokeRepeating("UpdatePath", 0f, 0.5f);
+        animator = GetComponent<Animator>();
     }
 
     private void OnpathComplete(Path P)
@@ -77,21 +79,24 @@ public class SimpleEnemy : AbstractEnemy
         Vector2 force = direction * movementSpeed * Time.fixedDeltaTime;
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaipoint]);
 
+        animator.SetFloat("VelocX", rb.velocity.x);
+        animator.SetFloat("VelocY", rb.velocity.y);
+        
+        if(rb.velocity.x == 0)
+        {
+            animator.SetInteger("Veloc0", 0);
+        }
+        else
+        {
+            animator.SetInteger("Veloc0", 1);
+        }
+
         if (distance < nextwaipointdistance)
         {
             currentWaipoint++;
         }
 
         rb.velocity = force;
-
-        if (bulletCooldown < 0.2f)
-        {
-            GetComponent<SpriteRenderer>().color = Color.red;
-        }
-        else
-        {
-            GetComponent<SpriteRenderer>().color = new Color(0.5f, 0f, 0f, 1f);
-        }
         Shoot();
     }
 
