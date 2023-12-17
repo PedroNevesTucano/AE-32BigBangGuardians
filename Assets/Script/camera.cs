@@ -1,8 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class CameraController : MonoBehaviour
 {
@@ -15,9 +15,15 @@ public class CameraController : MonoBehaviour
     private Vector3 initialOffset;
     private bool isRightMouseButtonDown = false;
 
+    public float shakeDuration;
+    public float shakeIntensity;
+
+    public bool gotshot = false;
+
     void Start()
     {
         initialOffset = transform.position - player.transform.position;
+        shakeDuration = 0;
     }
 
     void Update()
@@ -30,6 +36,15 @@ public class CameraController : MonoBehaviour
         if (Input.GetMouseButtonUp(1))
         {
             isRightMouseButtonDown = false;
+        }
+        
+        if (shakeDuration > 0)
+        {
+            shakeDuration -= Time.deltaTime;
+        }
+        else
+        {
+            shakeDuration = 0; 
         }
     }
 
@@ -66,5 +81,31 @@ public class CameraController : MonoBehaviour
             targetPosition = player.transform.position + initialOffset;
             transform.position = Vector3.Lerp(transform.position, targetPosition, followSpeed * Time.fixedDeltaTime);
         }
+
+        Vector3 cameraposition = new Vector3(transform.position.x, transform.position.y, -10);
+
+        if (gotshot == true)
+        {
+            if (shakeDuration > 0)
+            {
+                transform.position = new Vector3(cameraposition.x + Random.insideUnitCircle.x * shakeIntensity,
+                    cameraposition.y + Random.insideUnitCircle.y * shakeIntensity, -10);
+
+                Debug.Log(new Vector3(cameraposition.x + Random.insideUnitCircle.x * shakeIntensity,
+                    cameraposition.y + Random.insideUnitCircle.y * shakeIntensity, -10));
+
+            }
+            else if (shakeDuration <= 0)
+            {
+                gotshot = false;
+                transform.position = new Vector3(cameraposition.x, cameraposition.y, -10);
+            }
+        }
+    }
+
+    public void TriggerShake()
+    {
+        shakeDuration = 0.5f;
+        gotshot = true;
     }
 }

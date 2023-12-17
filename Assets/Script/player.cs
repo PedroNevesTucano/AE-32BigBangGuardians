@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
     private Vector3 dashDirection;
 
     [SerializeField] TrailRenderer tr;
+    public CameraController Camera;
 
     // Start is called before the first frame update
     private void Awake()
@@ -189,11 +190,13 @@ public class Player : MonoBehaviour
         {
             playerHealth -= 15;
             iFrames = iFramesBase;
+            Camera.TriggerShake();
         }
         if (collision.CompareTag("BigEnemyBulletTag") && !IsDashing() && invincibility == false && iFrames <= 0)
         {
             playerHealth -= 30;
             iFrames = iFramesBase;
+            Camera.TriggerShake();
         }
     }
 
