@@ -20,6 +20,11 @@ public class GunCooldownUIUpdate : MonoBehaviour
     public Image RilfeUIIndicator;
     public AssaultRifle rifle;
 
+    public Sprite coldown1Active;
+    public Sprite coldown1Inactive;
+    public Sprite coldown2Active;
+    public Sprite coldown2Inactive;
+
     public UIType uiType;  // Add a variable to specify the UI type
 
     void Start()
@@ -36,12 +41,12 @@ public class GunCooldownUIUpdate : MonoBehaviour
         {
             if (sniper.bulletCooldown <= 0)
             {
-                SniperUIIndicator.color = Color.blue;
+                SniperUIIndicator.sprite = coldown1Active;
             }
             else
             {
-                SniperUIIndicator.color = Color.black;
-            }
+                SniperUIIndicator.sprite = coldown1Inactive;
+}
 
             if (WeaponSwitcher.currentWeapon == 0)
             {
@@ -56,11 +61,11 @@ public class GunCooldownUIUpdate : MonoBehaviour
         {
             if (sniper.bigBulletCooldown <= 0)
             {
-                ChargedUI.color = new Color(0f, 0.9333f, 1f, 1f);
+                ChargedUI.sprite = coldown2Active;
             }
             else
             {
-                ChargedUI.color = Color.black;
+                ChargedUI.sprite = coldown2Inactive;
             }
 
             if (WeaponSwitcher.currentWeapon == 0)
@@ -76,11 +81,11 @@ public class GunCooldownUIUpdate : MonoBehaviour
 
             if (shotgun.counter <= 0)
             {
-                ShotgunUIIndicator.color = Color.blue;
+                ShotgunUIIndicator.sprite = coldown1Active;
             }
             else
             {
-                ShotgunUIIndicator.color = Color.black;
+                ShotgunUIIndicator.sprite = coldown1Inactive;
             }
 
             if (WeaponSwitcher.currentWeapon == 1)
@@ -97,11 +102,11 @@ public class GunCooldownUIUpdate : MonoBehaviour
 
             if (rifle.counter <= 0)
             {
-                RilfeUIIndicator.color = Color.blue;
+                RilfeUIIndicator.sprite = coldown1Active;
             }
             else
             {
-                RilfeUIIndicator.color = Color.black;
+                RilfeUIIndicator.sprite = coldown1Inactive;
             }
 
             if (WeaponSwitcher.currentWeapon == 2)

@@ -34,6 +34,8 @@ public class Player : MonoBehaviour
 
     private Vector3 dashDirection;
 
+    public Animator dash_animator;
+
     [SerializeField] TrailRenderer tr;
     public CameraController Camera;
 
@@ -60,6 +62,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        dash_animator.SetBool("isDashingCooldwon", canDash);
         if (playerHealth > 100)
         {
             playerHealth = 100;

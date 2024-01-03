@@ -12,6 +12,7 @@ public class OEnemybehaviour : AbstractEnemy
     private float timer = 2;
     public GameObject trigger;
     public bool wastrigged;
+    public Animator animator;
 
 
 
@@ -58,6 +59,7 @@ public class OEnemybehaviour : AbstractEnemy
 
     void Update()
     {
+        animator.SetFloat("timer", timer);
         if (timer >= 2)
         {
             TeleportToNextPosition();

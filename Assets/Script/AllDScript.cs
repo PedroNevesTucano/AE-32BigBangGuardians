@@ -2,6 +2,7 @@ using UnityEngine;
 public class AllDScript : AbstractEnemy
 {
     private bool switchDirection;
+    public Animator animator;
     private void Awake()
     {
         bulletCooldownBase = bulletCooldown;
@@ -39,6 +40,7 @@ public class AllDScript : AbstractEnemy
     }
     protected override void Shoot()
     {
+        animator.SetBool("isShooting", true);
         if (CooldownChecker())
         {
             if (switchDirection == false)
