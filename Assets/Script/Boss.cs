@@ -26,7 +26,7 @@ public class Boss : MonoBehaviour
         Vector3 directionToPlayer = player.transform.position - transform.position;
         float distanceToPlayer = directionToPlayer.magnitude;
 
-        if (distanceToPlayer < 3 && Input.GetKeyDown(KeyCode.E))
+        if (distanceToPlayer < 3 && Input.GetKeyDown(KeyCode.E) && dialogueSystem.timer <= 3)
         {
             dialogueSystem.StartDialogue();
             istalking = true;

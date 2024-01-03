@@ -41,9 +41,12 @@ public class DialogueSystemNPC: MonoBehaviour
 
     public void StartDialogue()
     {
-        dialogueText.gameObject.SetActive(true);
-        dialogueText.text = currentNode.DialogueText;
-        DisplayOptions();
+        if (timer < 3)
+        {
+            dialogueText.gameObject.SetActive(true);
+            dialogueText.text = currentNode.DialogueText;
+            DisplayOptions();
+        }
         
     }
 
@@ -75,7 +78,6 @@ public class DialogueSystemNPC: MonoBehaviour
         {
             dialogueended = false;
             dialogueText.gameObject.SetActive(false);
-            timer = 0;
         }
 
         Vector3 directionToPlayer = player.transform.position - transform.position;

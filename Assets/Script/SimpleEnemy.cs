@@ -12,6 +12,7 @@ public class SimpleEnemy : AbstractEnemy
     bool reachedendofpath = false;
     Seeker seeker;
     private Animator animator;
+    public int angleoffset;
     
     /*
         Awake,Start,Update,FixedUpdate,OnTriggerEnter2D methods are inherited from MonoBehaviour 
@@ -71,25 +72,14 @@ public class SimpleEnemy : AbstractEnemy
 
     private void FixedUpdate()
     {
-        Vector3 directionToPlayer = player.transform.position - transform.position;
-        float distanceToPlayer = directionToPlayer.magnitude;
-        Vector3 movementDirection = directionToPlayer.normalized;
-
         Vector2 direction = ((Vector2)path.vectorPath[currentWaipoint] - rb.position).normalized;
+        float angle = Mathf.Atan2(direction.y, direction.x);
+        float angleDegrees = angle * Mathf.Rad2Deg;
+
         Vector2 force = direction * movementSpeed * Time.fixedDeltaTime;
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaipoint]);
 
-        animator.SetFloat("VelocX", rb.velocity.x);
-        animator.SetFloat("VelocY", rb.velocity.y);
-        
-        if(rb.velocity.x == 0)
-        {
-            animator.SetInteger("Veloc0", 0);
-        }
-        else
-        {
-            animator.SetInteger("Veloc0", 1);
-        }
+        animator.SetFloat("Angle", angleDegrees);
 
         if (distance < nextwaipointdistance)
         {
@@ -114,6 +104,9 @@ public class SimpleEnemy : AbstractEnemy
         if (CooldownChecker())
         {
             Vector3 direction = (player.transform.position - transform.position).normalized;
+
+            Quaternion rotation = Quaternion.Euler(0, 0, angleoffset);
+            direction = rotation * direction;
 
             float angle = Mathf.Atan2(direction.y, direction.x);
             float angleDegrees = angle * Mathf.Rad2Deg;
